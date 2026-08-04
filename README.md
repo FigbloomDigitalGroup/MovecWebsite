@@ -1,4 +1,4 @@
-# Movec Landing Page 🚀
+# Movec Landing Page
 
 Modern, responsive landing page for **Movec** - an ISP management platform and technology solutions provider. Built with React, TypeScript, and optimized for performance with code splitting, lazy loading, and integrated analytics.
 
@@ -7,35 +7,35 @@ Modern, responsive landing page for **Movec** - an ISP management platform and t
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?logo=vite)](https://vitejs.dev/)
 
-## 🌟 Features
+## Features
 
 ### Core Features
-- 🎨 **Modern UI/UX** - Clean, professional design with smooth animations
-- 🌓 **Dark Mode** - Theme toggle with system preference detection
-- 📱 **Fully Responsive** - Mobile-first design, works on all devices
-- ⚡ **Performance Optimized** - Code splitting, lazy loading, optimized bundles
-- 🔍 **SEO Ready** - Meta tags, sitemap, robots.txt, Open Graph tags
-- ♿ **Accessible** - WCAG compliant, keyboard navigation, ARIA labels
+- **Modern UI/UX** - Clean, professional design with smooth animations
+- **Dark Mode** - Theme toggle with system preference detection
+- **Fully Responsive** - Mobile-first design, works on all devices
+- **Performance Optimized** - Code splitting, lazy loading, optimized bundles
+- **SEO Ready** - Meta tags, sitemap, robots.txt, Open Graph tags
+- **Accessible** - WCAG compliant, keyboard navigation, ARIA labels
 
 ### Technical Features
-- 📊 **Google Analytics 4** - Automatic page tracking, scroll depth, events
-- 🔥 **Firebase Integration** - Real-time reviews and testimonials
-- 🎭 **Smooth Animations** - Page transitions, streaming content, micro-interactions
-- 📦 **Lazy Loading** - Images and routes load on-demand
-- 🎯 **Form Validation** - Real-time validation with error messages
-- 🔄 **Auto-scroll Management** - Smooth scroll-to-top on navigation
+- **Google Analytics 4** - Automatic page tracking, scroll depth, events
+- **Firebase Integration** - Real-time reviews and testimonials
+- **Smooth Animations** - Page transitions, streaming content, micro-interactions
+- **Lazy Loading** - Images and routes load on-demand
+- **Form Validation** - Real-time validation with error messages
+- **Auto-scroll Management** - Smooth scroll-to-top on navigation
 
 ### Business Features
-- 🏢 **Service Pages** - ISP Platform, Software, Billing, Starlink, CCTV, GPS, IT Support
-- 👥 **Team Section** - Meet the team with profile images
-- ⭐ **Reviews System** - Firebase-powered customer testimonials
-- 💬 **WhatsApp Integration** - Direct contact via WhatsApp widget
-- 📄 **Legal Pages** - Privacy Policy & Terms of Service
-- 🎯 **404 Page** - Custom not-found page with navigation
+- **Service Pages** - ISP Platform, Software, Billing, Starlink, CCTV, GPS, IT Support
+- **Team Section** - Meet the team with profile images
+- **Reviews System** - Firebase-powered customer testimonials
+- **WhatsApp Integration** - Direct contact via WhatsApp widget
+- **Legal Pages** - Privacy Policy & Terms of Service
+- **404 Page** - Custom not-found page with navigation
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technologies |
 |----------|-------------|
@@ -51,7 +51,7 @@ Modern, responsive landing page for **Movec** - an ISP management platform and t
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 movec-landing-page/
@@ -101,7 +101,7 @@ movec-landing-page/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -155,7 +155,7 @@ movec-landing-page/
 
 ---
 
-## 📜 Available Scripts
+## Available Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -166,7 +166,7 @@ movec-landing-page/
 
 ---
 
-## 🎨 Key Features Explained
+## Key Features Explained
 
 ### 1. Performance Optimization
 
@@ -251,7 +251,7 @@ Animated content reveal:
 
 ---
 
-## 🎯 Pages Overview
+## Pages Overview
 
 | Page | Route | Description |
 |------|-------|-------------|
@@ -272,7 +272,7 @@ Animated content reveal:
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Vite Configuration
 
@@ -307,7 +307,7 @@ Custom animations and utilities:
 
 ---
 
-## 🚢 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
@@ -343,7 +343,7 @@ Upload the `dist` folder to your hosting provider.
 
 ---
 
-## 📊 Performance Metrics
+## Performance Metrics
 
 ### Bundle Sizes (Production)
 
@@ -363,7 +363,7 @@ Upload the `dist` folder to your hosting provider.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -385,19 +385,19 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 🐛 Known Issues
+## Known Issues
 
 - None currently reported
 
 ---
 
-## 📝 License
+## License
 
 This project is proprietary and confidential. All rights reserved by Movec.
 
 ---
 
-## 👥 Team
+## Team
 
 - **Ian D** - Founder & CEO
 - **Luke K** - Operations Manager
