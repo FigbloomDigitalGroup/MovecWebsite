@@ -1,6 +1,5 @@
 import GpsFeatures from "../../dummydata/GpsFeatures";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
-//import IspFeature from "../../components/cards/IspFeature";
 import CardFeatureII from "../../components/cards/CardFeatureII";
 
 const Gps = () => {
