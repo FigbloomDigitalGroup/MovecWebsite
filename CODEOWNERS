@@ -1,0 +1,25 @@
+# Code Owners for Movec Landing Page
+# These owners will be automatically requested for review when someone opens a pull request
+
+# Default owners for everything in the repo
+* @FigbloomDigitalGroup
+
+# Frontend components
+/src/components/ @FigbloomDigitalGroup
+/src/pages/ @FigbloomDigitalGroup
+
+# Configuration files
+/vite.config.ts @FigbloomDigitalGroup
+/tsconfig.json @FigbloomDigitalGroup
+/tailwind.config.js @FigbloomDigitalGroup
+
+# Deployment and infrastructure
+/render.yaml @FigbloomDigitalGroup
+/.github/ @FigbloomDigitalGroup
+
+# Documentation
+/*.md @FigbloomDigitalGroup
+
+# Security-sensitive files
+/SECURITY.md @FigbloomDigitalGroup
+/LICENSE @FigbloomDigitalGroup
