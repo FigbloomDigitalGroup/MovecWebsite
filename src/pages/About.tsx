@@ -71,9 +71,15 @@ const teamMembers: TeamMember[] = [
     role: "Operations Manager",
   },
   {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Moses M",
+    role: "Sales & Marketing Lead",
+  },
+
+  {
     image: "/images/ruth_kibet.jpeg",
     name: "Ruth K",
-    role: "Sales & Marketing Lead",
+    role: "Sales Marketer",
   },
   {
     image: "/images/Michael.jpeg",
@@ -88,18 +94,47 @@ const teamMembers: TeamMember[] = [
 
   {
     image: "/images/istockphoto-2151669184-612x612.jpg",
-    name: "Francis M",
-    role: "Junior Software Developer",
+    name: "Hassan F",
+    role: "Senior Software Developer",
   },
 
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Fidel M",
+    role: "Software Developer",
+  },
 
 
   {
     image: "/images/istockphoto-2151669184-612x612.jpg",
-    name: "Kelvin K",
+    name: "Moses K",
+    role: "Project Manager",
+  },
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Francis M",
+    role: "Junior Software Developer",
+  },
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Joe W",
+    role: "Software Developer",
+  },
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Collins K",
     role: "Lead Technical Engineer",
   },
-
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Kelvin K",
+    role: "Technical Engineer",
+  },
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Esther N",
+    role: "Help Desk Support/Software Developer",
+  }
 ];
 
 interface Review {
