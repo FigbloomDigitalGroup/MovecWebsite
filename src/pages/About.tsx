@@ -76,7 +76,7 @@ const teamMembers: TeamMember[] = [
     role: "Sales & Marketing Lead",
   },
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/Michael.jpeg",
     name: "Michael M",
     role: "Lead Software Developer",
   },
