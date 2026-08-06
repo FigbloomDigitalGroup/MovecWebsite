@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HTML5 structural page region landmarks (`<header role="banner">`) in `ResponsiveNav.tsx` for WAVE and WCAG compliance
 - Module type declaration for `firebase/firestore` in `vite-env.d.ts`
 - Schema.org JSON-LD structured data and custom `<Seo>` meta tags across all sub-service pages (`Software`, `Billing`, `Starlink`, `CCTV`, `GPS`, `IT Support`)
+- Fading "MOVEC" brand watermark in `Footer.tsx` using top-to-bottom CSS mask gradient, positioned above the copyright bar
 
 ### Changed
 - Updated hero header elements from `<h2>` to `<h1>` in `HeroHeader.tsx` and `Contacts.tsx` to establish proper `<h1>` heading structure across all pages
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Resolved WebAIM (WAVE) accessibility alerts ("No page regions" and "No heading structure") across all site routes
 - Fixed Vite import resolution error for `react-icons` submodules by restoring missing dependencies and clearing pre-bundle cache
+- Fixed `Footer.tsx` corruption caused by misplaced watermark inside Quick Links section and duplicate `export default Footer` that caused a blank white screen
 
 ---
 

@@ -22,12 +22,12 @@ const Footer = () => {
             src="images/movec logo f.png"
             alt="Movec Connect"
             loading="lazy"
-            className="w-40 mb-6 dark:hidden"/>
+            className="w-40 mb-6 dark:hidden" />
           <img
             src="/images/logo.png"
             alt="Movec Connect"
             loading="lazy"
-            className="w-40 mb-6 hidden dark:block"/>
+            className="w-40 mb-6 hidden dark:block" />
 
           <p className="leading-7 text-gray-600 dark:text-gray-400 text-sm">
             Smart Technology for Every Business.
@@ -202,6 +202,19 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Fading MOVEC Watermark */}
+      <div className="relative overflow-hidden select-none pointer-events-none" aria-hidden="true">
+        <p
+          className="text-center font-black tracking-tighter text-gray-400 dark:text-gray-700 leading-none"
+          style={{
+            fontSize: "clamp(3rem, 13vw, 10rem)",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%)",
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%)",
+          }}
+        >
+          MOVEC
+        </p>
+      </div>
 
       <div className="border-t border-gray-300 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
