@@ -70,8 +70,8 @@ const teamMembers: TeamMember[] = [
     role: "Operations Manager",
   },
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
-    name: "Moses M",
+    image: "/images/Amos,marketing.jpeg",
+    name: "Amos M",
     role: "Sales & Marketing Lead",
   },
 
@@ -92,47 +92,64 @@ const teamMembers: TeamMember[] = [
   },
 
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/About (2).webp ",
     name: "Hassan F",
     role: "Senior Software Developer",
   },
 
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/software_eng.png",
     name: "Fidel M",
     role: "Software Developer",
   },
+  {
+    image: "/images/givenn.jpeg",
+    name: "Given J",
+    role: "Assitant Project Manager",
+  },
 
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
-    name: "Moses K",
-    role: "Project Manager",
-  },
-  {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/francis_eng.jpg",
     name: "Francis M",
     role: "Junior Software Developer",
   },
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/joe_soft.png",
     name: "Joe W",
     role: "Software Developer",
   },
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/Screenshot 2026-08-06 101430.png",
     name: "Collins K",
     role: "Lead Technical Engineer",
   },
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/Screenshot 2026-08-06 102300.png",
     name: "Kelvin K",
     role: "Technical Engineer",
   },
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/Screenshot 2026-08-06 101237.png",
+    name: "Francis K",
+    role: "Technical Engineer",
+  },
+
+  {
+    image: "/images/esther.jpeg ",
     name: "Esther N",
     role: "Help Desk Support/Software Developer",
-  }
+  },
+  {
+    image: "/images/mark.jpeg ",
+    name: "Mark M",
+    role: "Sales Marketer",
+  },
+  {
+    image: "/images/hr&admin.jpeg",
+    name: "Zilpha O",
+    role: "HR Admin Manager",
+  },
+
 ];
 
 
