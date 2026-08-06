@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module type declaration for `firebase/firestore` in `vite-env.d.ts`
 - Schema.org JSON-LD structured data and custom `<Seo>` meta tags across all sub-service pages (`Software`, `Billing`, `Starlink`, `CCTV`, `GPS`, `IT Support`)
 - Fading "MOVEC" brand watermark in `Footer.tsx` using top-to-bottom CSS mask gradient, positioned above the copyright bar
+- Subtle tech/circuit doodle repeating background pattern baked directly into page sections via `.bg-doodle` utility in `index.css` and `AlternatingSection.tsx` with static `background-attachment: fixed`
 
 ### Changed
 - Updated hero header elements from `<h2>` to `<h1>` in `HeroHeader.tsx` and `Contacts.tsx` to establish proper `<h1>` heading structure across all pages

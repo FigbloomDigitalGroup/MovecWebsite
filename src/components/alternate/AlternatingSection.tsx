@@ -30,9 +30,7 @@ const AlternatingSection = ({
       id={id}
       className={`
         py-24
-        transition-colors
-        duration-300
-        ${isDark ? "bg-black" : "bg-white dark:bg-black"}
+        ${isDark ? "bg-black" : "bg-doodle"}
       `}>
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div
