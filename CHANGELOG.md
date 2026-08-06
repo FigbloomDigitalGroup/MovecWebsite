@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Michael's profile image on About page
 - HTML5 structural page region landmarks (`<header role="banner">`) in `ResponsiveNav.tsx` for WAVE and WCAG compliance
 - Module type declaration for `firebase/firestore` in `vite-env.d.ts`
+- Schema.org JSON-LD structured data and custom `<Seo>` meta tags across all sub-service pages (`Software`, `Billing`, `Starlink`, `CCTV`, `GPS`, `IT Support`)
 
 ### Changed
 - Updated hero header elements from `<h2>` to `<h1>` in `HeroHeader.tsx` and `Contacts.tsx` to establish proper `<h1>` heading structure across all pages

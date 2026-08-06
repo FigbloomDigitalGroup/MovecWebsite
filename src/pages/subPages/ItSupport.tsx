@@ -1,11 +1,29 @@
 import ItSupportFeatures from "../../dummydata/ItSupportFeatures";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import IspFeature from "../../components/cards/IspFeature";
+import { Seo } from "../../components/SEO/Seo";
 
 
 const ItSupport = () => {
   return (
     <>
+      <Seo
+        title="IT Support & Network Infrastructure | Movec Connect"
+        description="Comprehensive IT support, enterprise network engineering, MikroTik router configuration, optical fiber infrastructure, and 24/7 technical troubleshooting."
+        path="/itsupport"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "IT Support & Enterprise Networking",
+          "serviceType": "IT Managed Services & Network Engineering",
+          "provider": {
+            "@type": "Organization",
+            "name": "Movec Connect",
+            "url": "https://movec-landing-page-xfza-git-main-maina-gits-projects.vercel.app"
+          },
+          "description": "On-demand IT support, server management, firewall configuration, structured cabling, and network troubleshooting."
+        }}
+      />
       {/* Hero Section */}
       <section
         className="

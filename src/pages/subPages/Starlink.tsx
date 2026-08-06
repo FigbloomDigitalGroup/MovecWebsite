@@ -1,10 +1,28 @@
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import IspFeature from "../../components/cards/IspFeature";
 import StarlinkFeatures from "../../dummydata/StarlinkFeatures";
+import { Seo } from "../../components/SEO/Seo";
 
 const Starlink = () => {
   return (
     <>
+      <Seo
+        title="Starlink Installation & Signal Optimization | Movec Connect"
+        description="Professional Starlink satellite installation, dish alignment, network integration, and high-speed internet optimization for homes, businesses, and ISPs."
+        path="/starlink"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Starlink Satellite Installation & Setup",
+          "serviceType": "Satellite Broadband Installation",
+          "provider": {
+            "@type": "Organization",
+            "name": "Movec Connect",
+            "url": "https://movec-landing-page-xfza-git-main-maina-gits-projects.vercel.app"
+          },
+          "description": "Professional Starlink satellite dish mounting, cabling, Wi-Fi networking, and signal optimization."
+        }}
+      />
       {/* Hero Section */}
       <section
         className="
