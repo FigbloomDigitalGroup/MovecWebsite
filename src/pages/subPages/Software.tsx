@@ -1,11 +1,29 @@
 import SoftwareFeatures from "../../dummydata/SoftwareFeatures";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import IspFeature from "../../components/cards/IspFeature";
+import { Seo } from "../../components/SEO/Seo";
 
 
 const Software = () => {
   return (
     <>
+      <Seo
+        title="Custom Software Development | Movec Connect"
+        description="From concept to deployment, we design and build custom software tailored to your workflows — scalable, reliable, and made to grow with you."
+        path="/software"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Custom Software Development",
+          "serviceType": "Software Engineering & Custom Development",
+          "provider": {
+            "@type": "Organization",
+            "name": "Movec Connect",
+            "url": "https://movec-landing-page-xfza-git-main-maina-gits-projects.vercel.app"
+          },
+          "description": "Custom software engineered specifically for ISP management, automation, and business operations."
+        }}
+      />
       {/* Hero Section */}
       <section
         className="

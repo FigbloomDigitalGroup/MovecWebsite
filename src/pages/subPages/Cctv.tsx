@@ -1,12 +1,29 @@
 import CctvFeatures from "../../dummydata/CctvFeatures";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
-//import IspFeature from "../../components/cards/IspFeature";
 import CardFeatureII from "../../components/cards/CardFeatureII";
+import { Seo } from "../../components/SEO/Seo";
 
 
 const Cctv = () => {
   return (
     <>
+      <Seo
+        title="CCTV Security Systems & Monitoring | Movec Connect"
+        description="HD & IP CCTV camera installation, remote mobile monitoring, motion detection, and 24/7 security surveillance systems for homes and businesses."
+        path="/cctv"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "CCTV Security Systems & Surveillance",
+          "serviceType": "Security System Installation",
+          "provider": {
+            "@type": "Organization",
+            "name": "Movec Connect",
+            "url": "https://movec-landing-page-xfza-git-main-maina-gits-projects.vercel.app"
+          },
+          "description": "Professional IP CCTV installation, remote smartphone surveillance, NVR/DVR setup, and night vision security systems."
+        }}
+      />
       {/* Hero Section */}
       <section
         className="

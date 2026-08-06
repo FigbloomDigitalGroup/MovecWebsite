@@ -1,10 +1,28 @@
 import GpsFeatures from "../../dummydata/GpsFeatures";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
 import CardFeatureII from "../../components/cards/CardFeatureII";
+import { Seo } from "../../components/SEO/Seo";
 
 const Gps = () => {
   return (
     <>
+      <Seo
+        title="GPS Fleet Tracking & Vehicle Monitoring | Movec Connect"
+        description="Real-time GPS vehicle tracking, fuel monitoring, route optimization, and geofencing for corporate fleets, motorbikes, and commercial transport."
+        path="/gps"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "GPS Fleet Tracking & Telematics",
+          "serviceType": "Fleet Telematics & Vehicle Tracking",
+          "provider": {
+            "@type": "Organization",
+            "name": "Movec Connect",
+            "url": "https://movec-landing-page-xfza-git-main-maina-gits-projects.vercel.app"
+          },
+          "description": "Real-time GPS vehicle tracking, speed alerts, fuel management, and automated fleet reports."
+        }}
+      />
       {/* Hero Section */}
       <section
         className="

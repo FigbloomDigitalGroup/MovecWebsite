@@ -7,6 +7,7 @@ interface SeoProps {
   path: string; // e.g. "/about"
   image?: string;
   type?: string; // article, website, etc.
+  schemaData?: Record<string, any>;
 }
 
 /*const SITE_URL = 'https://yoursite.com';*/
@@ -19,9 +20,25 @@ export function Seo({
   description, 
   path, 
   image = DEFAULT_IMAGE,
-  type = 'website' 
+  type = 'website',
+  schemaData
 }: SeoProps) {
   const url = `${SITE_URL}${path}`;
+
+  const jsonLd = schemaData || {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": SITE_NAME,
+    "url": SITE_URL,
+    "logo": DEFAULT_IMAGE,
+    "description": description,
+    "sameAs": [],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+254796287392",
+      "contactType": "customer support"
+    }
+  };
 
   return (
     <Helmet>
@@ -54,6 +71,11 @@ export function Seo({
       <meta name="author" content={SITE_NAME} />
       <meta name="robots" content="index, follow" />
       <meta name="theme-color" content="#f97316" />
+
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(jsonLd)}
+      </script>
     </Helmet>
   );
 }

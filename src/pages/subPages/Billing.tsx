@@ -1,15 +1,29 @@
-//import { BillingFeatures } from "../dummydata/BillingFeatures";
 import BillingFeatures from "../../dummydata/BillingFeatures";
-//import ContentHeader from "../components/ContentHeader/ContentHeader";
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
-//import IspFeature from "../components/cards/IspFeature";
-//import IspFeature from "../../components/cards/IspFeature";
-//import BillingFeature from "../../components/cards/BillingFeature";
 import BillingCard from "../../components/cards/BillingCard";
+import { Seo } from "../../components/SEO/Seo";
 
 const Billing = () => {
   return (
     <>
+      <Seo
+        title="Automated ISP Billing Systems | Movec Connect"
+        description="Streamline invoicing, automated M-Pesa payments, subscriber bandwidth control, and customer accounts with Movec's ISP billing platform."
+        path="/billing"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Movec Automated Billing System",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "Automated billing, M-Pesa integration, and subscriber account management for Internet Service Providers.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }}
+      />
       {/* Hero Section */}
       <section
         className="
