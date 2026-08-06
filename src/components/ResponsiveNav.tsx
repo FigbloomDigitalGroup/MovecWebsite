@@ -9,14 +9,14 @@ const ResponsiveNav = () => {
   const closeNav = () => setShowNav(false);
 
   return (
-    <>
+    <header role="banner">
       <Navbar openNav={openNav} />
 
       <MobileNav
         showNav={showNav}
         closeNav={closeNav}
       />
-    </>
+    </header>
   );
 };
 

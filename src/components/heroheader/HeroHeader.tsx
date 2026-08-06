@@ -36,7 +36,7 @@ const HeroHeader = ({
           {eyebrow}
         </span>
       )}
-      <h2
+      <h1
         className={`
           mt-4
           text-4xl
@@ -46,7 +46,7 @@ const HeroHeader = ({
           ${isDark ? "text-white" : "text-slate-900 dark:text-white"}`}>
         {title}
         <span className="text-[#10B982]"> {span}</span>
-      </h2>
+      </h1>
       <p
         className={`
           mt-5

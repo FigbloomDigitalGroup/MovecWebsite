@@ -122,10 +122,10 @@ const Contacts = () => {
               Get In Touch
             </span>
 
-            <h2 className="mt-4 text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
+            <h1 className="mt-4 text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
               Let's start a
               <span className="text-[#10B982]"> conversation</span>
-            </h2>
+            </h1>
 
             <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
               Fill out the form below and our team will get back to you within

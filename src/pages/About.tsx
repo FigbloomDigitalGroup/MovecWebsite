@@ -6,7 +6,6 @@ import {
   orderBy,
   onSnapshot,
   serverTimestamp,
-  Timestamp,
 } from "firebase/firestore";
 import { db } from "../config/Firebase"; // adjust path to match your project
 import ContentHeader from "../components/ContentHeader/ContentHeader";
@@ -142,7 +141,7 @@ interface Review {
   name: string;
   rating: number;
   comment: string;
-  createdAt: Timestamp | null;
+  createdAt: any;
 }
 
 const About = () => {
@@ -161,15 +160,15 @@ const About = () => {
 
     const unsubscribe = onSnapshot(
       q,
-      (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
+      (snapshot: any) => {
+        const data = snapshot.docs.map((doc: any) => ({
           id: doc.id,
           ...doc.data(),
         })) as Review[];
         setReviews(data);
         setReviewsLoading(false);
       },
-      (err) => {
+      (err: any) => {
         console.error("Error fetching reviews:", err);
         setReviewsLoading(false);
       }
