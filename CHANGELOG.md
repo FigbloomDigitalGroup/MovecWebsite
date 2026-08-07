@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added explicit type annotations for Firestore snapshot listeners in `About.tsx`
 - Redesigned image card containers in `AlternatingSection.tsx` replacing harsh diagonal clip-path polygons with sleek `rounded-2xl` borders, ambient blur glows (`from-orange-500/30 via-[#10B982]/25`), and subtle hover scale interactions
 - Upgraded `MobileNav.tsx` to a sleek 100% full-screen menu overlay with backdrop blur (`backdrop-blur-xl`), locking background body scroll while open and eliminating duplicate logo visibility on mobile screens
+- Collapsed `Contacts.tsx` quick contact cards into compact interactive icon buttons (Email, WhatsApp, Call) without displaying text email addresses/phone numbers, and removed redundant "Visit Us" card in favor of the interactive Google Map
 
 ### Fixed
 - Resolved WebAIM (WAVE) accessibility alerts ("No page regions" and "No heading structure") across all site routes
