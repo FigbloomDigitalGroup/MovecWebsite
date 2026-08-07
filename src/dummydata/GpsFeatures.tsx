@@ -12,7 +12,7 @@ export const GpsFeatures = [
       "Plan and adjust routes to reduce travel time, fuel usage and delivery delays.",
   },
   {
-    image: "/images/geralt-gears-6152203.jpg",
+    image: "/images/qimono-speedometer-1249610_1920.jpg",
     title: "Driver Behavior Monitoring",
     description:
       "Track speeding, harsh braking and idle time to improve safety and accountability.",

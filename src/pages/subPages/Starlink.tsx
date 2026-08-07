@@ -1,7 +1,7 @@
 import ContentHeader from "../../components/ContentHeader/ContentHeader";
-import IspFeature from "../../components/cards/IspFeature";
 import StarlinkFeatures from "../../dummydata/StarlinkFeatures";
 import { Seo } from "../../components/SEO/Seo";
+import StarlinkCard from "../../components/cards/StarLink";
 
 const Starlink = () => {
   return (
@@ -69,7 +69,7 @@ const Starlink = () => {
           <ContentHeader
             title="Everything covered,"
             span=" from setup to support"
-            description="From site assessment to full installation, we handle every step of getting you connected via Starlink."/>
+            description="From site assessment to full installation, we handle every step of getting you connected via Starlink." />
 
           {/* Feature Cards */}
           <div
@@ -77,10 +77,10 @@ const Starlink = () => {
               grid
               grid-cols-1
               sm:grid-cols-2
-              lg:grid-cols-3
+              lg:grid-cols-2
               gap-6">
             {StarlinkFeatures.map((feature, index) => (
-              <IspFeature key={index} feature={feature} />
+              <StarlinkCard key={index} feature={feature} />
             ))}
           </div>
         </div>

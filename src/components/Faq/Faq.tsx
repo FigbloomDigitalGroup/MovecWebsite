@@ -25,12 +25,12 @@ const faqs: FaqItem[] = [
   {
     question: "Do you offer ongoing support after launch?",
     answer:
-      "Yes, we provide maintenance and support packages for all our software, network, and installation services.",
+      "Yes, we provide maintenance and support packages for all our software, network and installation services.",
   },
   {
     question: "How do I get started?",
     answer:
-      "Reach out through our contact form, email, or WhatsApp, and we'll schedule a call to understand your needs and scope the work.",
+      "Reach out through our contact form, email or WhatsApp and we'll schedule a call to understand your needs and scope the work.",
   },
 ];
 

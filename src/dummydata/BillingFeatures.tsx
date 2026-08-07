@@ -4,8 +4,8 @@ export const BillingFeatures = [
     description:
       "Generate and send invoices automatically, cutting down manual work and billing errors.",
     points: [
-      "Recurring invoices scheduled monthly, weekly, or custom cycles",
-      "Auto-calculated taxes, discounts, and late fees",
+      "Recurring invoices scheduled monthly, weekly or custom cycles",
+      "Auto-calculated taxes, discounts and late fees",
       "PDF invoices emailed directly to clients",
     ],
   },
@@ -14,7 +14,7 @@ export const BillingFeatures = [
     description:
       "Accept and track payments across multiple methods, all synced with customer accounts.",
     points: [
-      "M-Pesa, card, and bank transfer support",
+      "M-Pesa, card and bank transfer support",
       "Real-time payment confirmation and receipts",
       "Auto-reconciliation against outstanding invoices",
     ],

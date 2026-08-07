@@ -99,6 +99,41 @@ const Contacts = () => {
 
   return (
     <>
+
+
+      {/* Hero Section */}
+      <section
+        className="
+          relative
+          py-32
+          bg-cover
+          bg-center
+          bg-fixed
+          flex
+          items-center"
+        style={{
+          backgroundImage: "url('/images/graphixmade-ai-generated-8337333_1920.png')",
+        }}>
+        <div className="absolute inset-0 bg-black/70" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
+          <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+            Get In Touch
+          </span>
+          <h1 className="mt-4 text-4xl md:text-6xl font-bold text-white leading-tight">
+            We'd Love to Hear
+            <span className="text-orange-500">From You</span>
+          </h1>
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed">
+            Whether you're just exploring or ready to move forward, we're here to help.
+            Reach out and let's start the conversation.
+          </p>
+          <div className="w-24 h-1 bg-orange-500 mx-auto my-8" />
+        </div>
+      </section>
+
+      { /* we'd love to hear from you */}
       <section
         id="contact"
         className="
@@ -107,20 +142,15 @@ const Contacts = () => {
           transition-colors
           duration-300
           py-24">
-
         <Seo
           title="Contact Us | Movec - Get in Touch"
           description="Questions about comparing ISPs or need help choosing a plan? Reach out to the Movec team — we're happy to help."
-          path="/contact"/>
+          path="/contact" />
 
         <div className="max-w-3xl mx-auto px-6">
 
           {/* Header */}
           <div className="text-center mb-14">
-
-            <span className="text-orange-500 uppercase text-sm tracking-wider font-semibold">
-              Get In Touch
-            </span>
 
             <h1 className="mt-4 text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
               Let's start a
@@ -169,7 +199,7 @@ const Contacts = () => {
                     focus:bg-white
                     dark:focus:bg-transparent
                     outline-none
-                    transition-all`}/>
+                    transition-all`} />
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">{errors.name}</p>
                 )}
@@ -202,7 +232,7 @@ const Contacts = () => {
                     focus:bg-white
                     dark:focus:bg-transparent
                     outline-none
-                    transition-all`}/>
+                    transition-all`} />
 
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -211,7 +241,7 @@ const Contacts = () => {
                 <ValidationError
                   prefix="Email"
                   field="email"
-                  errors={state.errors}/>
+                  errors={state.errors} />
 
               </div>
 
@@ -243,7 +273,7 @@ const Contacts = () => {
                   focus:bg-white
                   dark:focus:bg-transparent
                   outline-none
-                  transition-all`}/>
+                  transition-all`} />
               {errors.subject && (
                 <p className="text-red-500 text-xs mt-1">{errors.subject}</p>
               )}
@@ -276,7 +306,7 @@ const Contacts = () => {
                   dark:focus:bg-transparent
                   outline-none
                   resize-none
-                  transition-all`}/>
+                  transition-all`} />
               {errors.message && (
                 <p className="text-red-500 text-xs mt-1">{errors.message}</p>
               )}
@@ -286,7 +316,7 @@ const Contacts = () => {
             <ValidationError
               prefix="Message"
               field="message"
-              errors={state.errors}/>
+              errors={state.errors} />
 
 
             <button

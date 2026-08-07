@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import {
-  collection,
   addDoc,
-  query,
-  orderBy,
+  collection,
   onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
+  Timestamp,
 } from "firebase/firestore";
-import { db } from "../config/Firebase"; // adjust path to match your project
+
+import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
@@ -162,9 +164,10 @@ interface Review {
 }
 
 const About = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [reviewsLoading, setReviewsLoading] = useState(true);
 
+  const [rawReviews, setRawReviews] = useState<Review[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [now, setNow] = useState(() => Timestamp.now());
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -172,19 +175,36 @@ const About = () => {
   const [submitting, setSubmitting] = useState(false);
   const [reviewError, setReviewError] = useState("");
 
+
+
+
+  const reviews = rawReviews.filter(
+    (review: any) => !review.expiresAt || review.expiresAt.toMillis() > now.toMillis()
+  );
+
   useEffect(() => {
-    const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+
+    const q = query(
+      collection(db, "reviews"),
+      orderBy("createdAt", "desc")
+    );
+
 
     const unsubscribe = onSnapshot(
       q,
       (snapshot: any) => {
+
         const data = snapshot.docs.map((doc: any) => ({
           id: doc.id,
           ...doc.data(),
         })) as Review[];
-        setReviews(data);
+
+
+        setRawReviews(data);
         setReviewsLoading(false);
+
       },
+
       (err: any) => {
         console.error("Error fetching reviews:", err);
         setReviewsLoading(false);
@@ -192,35 +212,65 @@ const About = () => {
     );
 
     return () => unsubscribe();
+
+  }, []);
+
+  /* brand new useEffect */
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(Timestamp.now());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setReviewError("");
 
     if (!name.trim() || !comment.trim() || rating === 0) {
-      setReviewError("Please fill in your name, a comment, and a star rating.");
+      setReviewError(
+        "Please fill in your name, a comment, and a star rating."
+      );
       return;
     }
 
     try {
       setSubmitting(true);
+      // TEST: delete after 14 days
+      const expiresAt = new Date();
+      /*expiresAt.setDate(expiresAt.getDate() + 14);*/
+      expiresAt.setDate(expiresAt.getDate() + 14);
+
       await addDoc(collection(db, "reviews"), {
         name: name.trim(),
         comment: comment.trim(),
         rating,
         createdAt: serverTimestamp(),
+
+        // expiration time
+        expiresAt: Timestamp.fromDate(expiresAt),
       });
+
+
+      // CLEAR FORM AFTER SUCCESS
       setName("");
       setComment("");
       setRating(0);
+      setHoverRating(0);
+
+
     } catch (err) {
       console.error("Error submitting review:", err);
       setReviewError("Something went wrong. Please try again.");
+
     } finally {
       setSubmitting(false);
     }
   };
+
 
   return (
     <>
