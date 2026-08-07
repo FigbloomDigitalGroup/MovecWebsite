@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated hero header elements from `<h2>` to `<h1>` in `HeroHeader.tsx` and `Contacts.tsx` to establish proper `<h1>` heading structure across all pages
 - Added explicit type annotations for Firestore snapshot listeners in `About.tsx`
+- Redesigned image card containers in `AlternatingSection.tsx` replacing harsh diagonal clip-path polygons with sleek `rounded-2xl` borders, ambient blur glows (`from-orange-500/30 via-[#10B982]/25`), and subtle hover scale interactions
 
 ### Fixed
 - Resolved WebAIM (WAVE) accessibility alerts ("No page regions" and "No heading structure") across all site routes
