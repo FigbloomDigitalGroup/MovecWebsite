@@ -1,4 +1,4 @@
-import { FaArrowRight, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
+import { FaArrowRight, FaEnvelope, FaPhone, FaWhatsapp, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { useForm, ValidationError } from "@formspree/react";
 import { Seo } from "../components/SEO/Seo";
 import Faq from "../components/Faq/Faq";
@@ -47,8 +47,7 @@ const Contacts = () => {
         }
         break;
       case "email":
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
+        if (!/\S+@\S+\.\S+/.test(value)) {
           error = "Please enter a valid email address";
         }
         break;
@@ -94,28 +93,61 @@ const Contacts = () => {
     {
       icon: FaEnvelope,
       title: "Email Us",
-      value: "sales@movecconnect.com",
       link: "mailto:sales@movecconnect.com",
-      linkText: "Send an email",
+      colorClass: "bg-orange-100 dark:bg-orange-500/10 text-orange-500 group-hover:bg-orange-500 group-hover:text-white group-hover:shadow-orange-500/25",
+    },
+    {
+      icon: FaWhatsapp,
+      title: "WhatsApp Us",
+      link: "https://wa.me/254796287392?text=Hi,%20I'd%20like%20to%20know%20more%20about%20your%20services.",
+      isExternal: true,
+      colorClass: "bg-emerald-100 dark:bg-emerald-500/10 text-[#10B982] group-hover:bg-[#10B982] group-hover:text-white group-hover:shadow-[#10B982]/25",
     },
     {
       icon: FaPhone,
       title: "Call Us",
-      value: "+254 796 287 392",
-      link: "https://wa.me/254796287392?text=Hi,%20I'd%20like%20to%20know%20more%20about%20your%20services.",
-      linkText: "Chat on WhatsApp",
-    },
-    {
-      icon: FaMapMarkerAlt,
-      title: "Visit Us",
-      value: "SMK Business Park, Enterprise Road-Nairobi",
-      link: "https://www.google.com/maps/search/?api=1&query=SMK+Business+Park+Enterprise+Road+Nairobi",
-      linkText: "Get directions",
+      link: "tel:+254796287392",
+      colorClass: "bg-blue-100 dark:bg-blue-500/10 text-blue-500 group-hover:bg-blue-500 group-hover:text-white group-hover:shadow-blue-500/25",
     },
   ];
 
   return (
     <>
+
+
+      {/* Hero Section */}
+      <section
+        className="
+          relative
+          py-32
+          bg-cover
+          bg-center
+          bg-fixed
+          flex
+          items-center"
+        style={{
+          backgroundImage: "url('/images/graphixmade-ai-generated-8337333_1920.png')",
+        }}>
+        <div className="absolute inset-0 bg-black/70" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
+          <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+            Get In Touch
+          </span>
+          <h1 className="mt-4 text-4xl md:text-6xl font-bold text-white leading-tight">
+            We'd Love to Hear
+            <span className="text-orange-500">From You</span>
+          </h1>
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed">
+            Whether you're just exploring or ready to move forward, we're here to help.
+            Reach out and let's start the conversation.
+          </p>
+          <div className="w-24 h-1 bg-orange-500 mx-auto my-8" />
+        </div>
+      </section>
+
+      { /* we'd love to hear from you */}
       <section
         id="contact"
         className="
@@ -124,20 +156,15 @@ const Contacts = () => {
           transition-colors
           duration-300
           py-24">
-
         <Seo
           title="Contact Us | Movec - Get in Touch"
           description="Questions about comparing ISPs or need help choosing a plan? Reach out to the Movec team — we're happy to help."
-          path="/contact"/>
+          path="/contact" />
 
         <div className="max-w-3xl mx-auto px-6">
 
           {/* Header */}
           <div className="text-center mb-14">
-
-            <span className="text-orange-500 uppercase text-sm tracking-wider font-semibold">
-              Get In Touch
-            </span>
 
             <h1 className="mt-4 text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
               Let's start a
@@ -186,7 +213,7 @@ const Contacts = () => {
                     focus:bg-white
                     dark:focus:bg-transparent
                     outline-none
-                    transition-all`}/>
+                    transition-all`} />
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">{errors.name}</p>
                 )}
@@ -219,7 +246,7 @@ const Contacts = () => {
                     focus:bg-white
                     dark:focus:bg-transparent
                     outline-none
-                    transition-all`}/>
+                    transition-all`} />
 
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -228,7 +255,7 @@ const Contacts = () => {
                 <ValidationError
                   prefix="Email"
                   field="email"
-                  errors={state.errors}/>
+                  errors={state.errors} />
 
               </div>
 
@@ -260,7 +287,7 @@ const Contacts = () => {
                   focus:bg-white
                   dark:focus:bg-transparent
                   outline-none
-                  transition-all`}/>
+                  transition-all`} />
               {errors.subject && (
                 <p className="text-red-500 text-xs mt-1">{errors.subject}</p>
               )}
@@ -293,7 +320,7 @@ const Contacts = () => {
                   dark:focus:bg-transparent
                   outline-none
                   resize-none
-                  transition-all`}/>
+                  transition-all`} />
               {errors.message && (
                 <p className="text-red-500 text-xs mt-1">{errors.message}</p>
               )}
@@ -303,7 +330,7 @@ const Contacts = () => {
             <ValidationError
               prefix="Message"
               field="message"
-              errors={state.errors}/>
+              errors={state.errors} />
 
 
             <button
@@ -387,102 +414,43 @@ const Contacts = () => {
 
 
 
-          {/* Contact Info */}
-          <div
-            className="
-              mt-16
-              pt-10
-              border-t
-              border-slate-200
-              dark:border-white/10
-              grid
-              grid-cols-1
-              sm:grid-cols-3
-              gap-6">
-
+          {/* Quick Contact Icon Buttons */}
+          <div className="mt-12 pt-8 border-t border-slate-200 dark:border-white/10 flex items-center justify-center gap-8 md:gap-12">
             {contacts.map((item, index) => {
               const Icon = item.icon;
               return (
                 <a
                   key={index}
                   href={item.link}
-                  target={item.title !== "Email Us" ? "_blank" : undefined}
-                  rel={item.title !== "Email Us" ? "noopener noreferrer" : undefined}
-                  className="
-                    group
-                    flex
-                    flex-col
-                    items-center
-                    text-center
-                    p-6
-                    rounded-xl
-                    bg-slate-50
-                    dark:bg-white/5
-                    hover:bg-orange-50
-                    dark:hover:bg-white/10
-                    border
-                    border-transparent
-                    hover:border-orange-500
-                    transition-all
-                    duration-300
-                    cursor-pointer
-                    min-h-[240px]">
-
+                  target={item.isExternal ? "_blank" : undefined}
+                  rel={item.isExternal ? "noopener noreferrer" : undefined}
+                  title={item.title}
+                  aria-label={item.title}
+                  className="group flex flex-col items-center gap-2.5 cursor-pointer"
+                >
                   <div
-                    className="
+                    className={`
                       flex
                       items-center
                       justify-center
                       w-14
                       h-14
-                      rounded-full
-                      bg-orange-100
-                      dark:bg-orange-500/10
-                      text-orange-500
-                      group-hover:bg-orange-500
-                      group-hover:text-white
+                      rounded-2xl
+                      shadow-md
                       transition-all
                       duration-300
-                      mb-4">
-                    <Icon className="text-xl" />
+                      group-hover:scale-110
+                      ${item.colorClass}
+                    `}
+                  >
+                    <Icon className="text-2xl transition-transform duration-300 group-hover:scale-110" />
                   </div>
-
-                  <p
-                    className="
-                      text-xs
-                      uppercase
-                      tracking-wide
-                      text-slate-500
-                      dark:text-gray-500
-                      mb-2">
+                  <span className="text-xs font-medium tracking-wide text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                     {item.title}
-                  </p>
-
-                  <p
-                    className="
-                      text-slate-900
-                      dark:text-white
-                      font-semibold
-                      mb-auto
-                      break-words
-                      flex-grow">
-                    {item.value}
-                  </p>
-
-                  <span
-                    className="
-                      text-sm
-                      text-orange-500
-                      font-medium
-                      group-hover:underline
-                      mt-4">
-                    {item.linkText} →
                   </span>
-
                 </a>
               );
             })}
-
           </div>
 
           {/* Interactive Location Map */}

@@ -24,7 +24,7 @@ export const ItSupportFeatures = [
     icon: <FaHeadset />,
     title: "Helpdesk & Troubleshooting",
     description:
-      "Fast, responsive support for day-to-day IT issues, so downtime stays minimal.",
+      "Fast, responsive support for day to day IT issues, so downtime stays minimal.",
   },
   {
     icon: <FaShieldAlt />,

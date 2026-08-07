@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import {
-  collection,
   addDoc,
-  query,
-  orderBy,
+  collection,
   onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
+  Timestamp,
 } from "firebase/firestore";
-import { db } from "../config/Firebase"; // adjust path to match your project
+
+import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
@@ -70,12 +72,6 @@ const teamMembers: TeamMember[] = [
     role: "Operations Manager",
   },
   {
-    image: "/images/Amos,marketing.jpeg",
-    name: "Amos M",
-    role: "Sales & Marketing Lead",
-  },
-
-  {
     image: "/images/ruth_kibet.jpeg",
     name: "Ruth K",
     role: "Sales Marketer",
@@ -91,6 +87,24 @@ const teamMembers: TeamMember[] = [
     role: "Senior Software Developer",
   },
 
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Hassan F",
+    role: "Senior Software Developer",
+  },
+
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Fidel M",
+    role: "Software Developer",
+  },
+
+
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Moses K",
+    role: "Project Manager",
+  },
   {
     image: "/images/About (2).webp ",
     name: "Hassan F",
@@ -113,41 +127,13 @@ const teamMembers: TeamMember[] = [
     name: "Francis M",
     role: "Junior Software Developer",
   },
-  {
-    image: "/images/joe_soft.png",
-    name: "Joe W",
-    role: "Software Developer",
-  },
-  {
-    image: "/images/Screenshot 2026-08-06 101430.png",
-    name: "Collins K",
-    role: "Lead Technical Engineer",
-  },
-  {
-    image: "/images/Screenshot 2026-08-06 102300.png",
-    name: "Kelvin K",
-    role: "Technical Engineer",
-  },
-  {
-    image: "/images/Screenshot 2026-08-06 101237.png",
-    name: "Francis K",
-    role: "Technical Engineer",
-  },
+
+
 
   {
-    image: "/images/esther.jpeg ",
-    name: "Esther N",
-    role: "Help Desk Support/Software Developer",
-  },
-  {
-    image: "/images/mark.jpeg ",
-    name: "Mark M",
-    role: "Sales Marketer",
-  },
-  {
-    image: "/images/hr&admin.jpeg",
-    name: "Zilpha O",
-    role: "HR Admin Manager",
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Kelvin K",
+    role: "Lead Technical Engineer",
   },
 
 ];
@@ -162,9 +148,10 @@ interface Review {
 }
 
 const About = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [reviewsLoading, setReviewsLoading] = useState(true);
 
+  const [rawReviews, setRawReviews] = useState<Review[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [now, setNow] = useState(() => Timestamp.now());
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -172,19 +159,36 @@ const About = () => {
   const [submitting, setSubmitting] = useState(false);
   const [reviewError, setReviewError] = useState("");
 
+
+
+
+  const reviews = rawReviews.filter(
+    (review: any) => !review.expiresAt || review.expiresAt.toMillis() > now.toMillis()
+  );
+
   useEffect(() => {
-    const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+
+    const q = query(
+      collection(db, "reviews"),
+      orderBy("createdAt", "desc")
+    );
+
 
     const unsubscribe = onSnapshot(
       q,
       (snapshot: any) => {
+
         const data = snapshot.docs.map((doc: any) => ({
           id: doc.id,
           ...doc.data(),
         })) as Review[];
-        setReviews(data);
+
+
+        setRawReviews(data);
         setReviewsLoading(false);
+
       },
+
       (err: any) => {
         console.error("Error fetching reviews:", err);
         setReviewsLoading(false);
@@ -192,35 +196,65 @@ const About = () => {
     );
 
     return () => unsubscribe();
+
+  }, []);
+
+  /* brand new useEffect */
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(Timestamp.now());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setReviewError("");
 
     if (!name.trim() || !comment.trim() || rating === 0) {
-      setReviewError("Please fill in your name, a comment, and a star rating.");
+      setReviewError(
+        "Please fill in your name, a comment, and a star rating."
+      );
       return;
     }
 
     try {
       setSubmitting(true);
+      // TEST: delete after 14 days
+      const expiresAt = new Date();
+      /*expiresAt.setDate(expiresAt.getDate() + 14);*/
+      expiresAt.setDate(expiresAt.getDate() + 14);
+
       await addDoc(collection(db, "reviews"), {
         name: name.trim(),
         comment: comment.trim(),
         rating,
         createdAt: serverTimestamp(),
+
+        // expiration time
+        expiresAt: Timestamp.fromDate(expiresAt),
       });
+
+
+      // CLEAR FORM AFTER SUCCESS
       setName("");
       setComment("");
       setRating(0);
+      setHoverRating(0);
+
+
     } catch (err) {
       console.error("Error submitting review:", err);
       setReviewError("Something went wrong. Please try again.");
+
     } finally {
       setSubmitting(false);
     }
   };
+
 
   return (
     <>
