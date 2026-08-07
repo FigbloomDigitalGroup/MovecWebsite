@@ -54,6 +54,16 @@ const aboutItems: AboutItem[] = [
   },
 ];
 
+
+interface TeamMember {
+  image: string;
+  name: string;
+  role: string;
+  department: "Leadership" | "Sales" | "Development" | "Technical";
+}
+
+
+/*
 interface TeamMember {
   image: string;
   name: string;
@@ -72,9 +82,34 @@ const teamMembers: TeamMember[] = [
     role: "Operations Manager",
   },
   {
+    image: "/images/esther.jpeg",
+    name: "Esther N",
+    role: "Office Admin/Software Developer"
+  },
+  {
+    image: "/images/hr&admin.jpeg",
+    name: "Zilpa O",
+    role: "HR / Admin manager",
+  },
+  {
+    image: "/images/Amos,marketing.jpeg",
+    name: "Amos M",
+    role: "Lead Sales Marketer"
+  },
+  {
     image: "/images/ruth_kibet.jpeg",
     name: "Ruth K",
     role: "Sales Marketer",
+  },
+  {
+    image: "/images/marketing.jpeg",
+    name: "Victor O",
+    role: "Sales Assistant",
+  },
+  {
+    image: "/images/mark.jpeg",
+    name: "Mark M",
+    role: "Sales Assistant"
   },
   {
     image: "/images/Michael.jpeg",
@@ -88,29 +123,10 @@ const teamMembers: TeamMember[] = [
   },
 
   {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
+    image: "/images/About (2).webp",
     name: "Hassan F",
     role: "Senior Software Developer",
   },
-
-  {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
-    name: "Fidel M",
-    role: "Software Developer",
-  },
-
-
-  {
-    image: "/images/istockphoto-2151669184-612x612.jpg",
-    name: "Moses K",
-    role: "Project Manager",
-  },
-  {
-    image: "/images/About (2).webp ",
-    name: "Hassan F",
-    role: "Senior Software Developer",
-  },
-
   {
     image: "/images/software_eng.png",
     name: "Fidel M",
@@ -125,18 +141,158 @@ const teamMembers: TeamMember[] = [
   {
     image: "/images/francis_eng.jpg",
     name: "Francis M",
-    role: "Junior Software Developer",
+    role: "Assistant Software Developer",
   },
+  {
+    image: "/images/joe_soft.png",
+    name: "Joe W",
+    role: "Assistant Software Developer"
+  },
+  {
+    image: "/images/Screenshot 2026-08-06 101430.png",
+    name: "Collins K",
+    role: "Lead Technical Engineer"
 
-
-
+  },
   {
     image: "/images/istockphoto-2151669184-612x612.jpg",
     name: "Kelvin K",
-    role: "Lead Technical Engineer",
+    role: "Technical Engineer",
+  },
+  {
+    image: "/images/Screenshot 2026-08-06 101237.png",
+    name: "Francis K",
+    role: "Technical Engineer"
+  }
+];
+*/
+
+const teamMembers: TeamMember[] = [
+  // Leadership
+  {
+    image: "/images/cto.png",
+    name: "Ian D",
+    role: "Founder & CEO",
+    department: "Leadership",
+  },
+  {
+    image: "/images/COO.png",
+    name: "Luke K",
+    role: "Operations Manager",
+    department: "Leadership",
+  },
+  {
+    image: "/images/esther.jpeg",
+    name: "Esther N",
+    role: "Office Admin/Software Developer",
+    department: "Leadership",
+  },
+  {
+    image: "/images/hr&admin.jpeg",
+    name: "Zilpa O",
+    role: "HR / Admin manager",
+    department: "Leadership",
   },
 
+  // Sales Team
+  {
+    image: "/images/Amos,marketing.jpeg",
+    name: "Amos M",
+    role: "Lead Sales Marketer",
+    department: "Sales",
+  },
+  {
+    image: "/images/ruth_kibet.jpeg",
+    name: "Ruth K",
+    role: "Sales Marketer",
+    department: "Sales",
+  },
+  {
+    image: "/images/marketing.jpeg",
+    name: "Victor O",
+    role: "Sales Assistant",
+    department: "Sales",
+  },
+  {
+    image: "/images/mark.jpeg",
+    name: "Mark M",
+    role: "Sales Assistant",
+    department: "Sales",
+  },
+
+  // Development Team
+  {
+    image: "/images/Michael.jpeg",
+    name: "Michael M",
+    role: "Lead Software Developer",
+    department: "Development",
+  },
+  {
+    image: "/images/WhatsApp Image 2026-08-04 at 12.18.29 PM.jpeg",
+    name: "Morris M",
+    role: "Senior Software Developer",
+    department: "Development",
+  },
+  {
+    image: "/images/About (2).webp",
+    name: "Hassan F",
+    role: "Senior Software Developer",
+    department: "Development",
+  },
+  {
+    image: "/images/software_eng.png",
+    name: "Fidel M",
+    role: "Software Developer",
+    department: "Development",
+  },
+  {
+    image: "/images/givenn.jpeg",
+    name: "Given J",
+    role: "Assitant Project Manager",
+    department: "Development",
+  },
+  {
+    image: "/images/francis_eng.jpg",
+    name: "Francis M",
+    role: "Assistant Software Developer",
+    department: "Development",
+  },
+  {
+    image: "/images/joe_soft.png",
+    name: "Joe W",
+    role: "Assistant Software Developer",
+    department: "Development",
+  },
+
+  // Technical Team
+  {
+    image: "/images/Screenshot 2026-08-06 101430.png",
+    name: "Collins K",
+    role: "Lead Technical Engineer",
+    department: "Technical",
+  },
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Kelvin K",
+    role: "Technical Engineer",
+    department: "Technical",
+  },
+  {
+    image: "/images/Screenshot 2026-08-06 101237.png",
+    name: "Francis K",
+    role: "Technical Engineer",
+    department: "Technical",
+  },
 ];
+
+const departmentOrder: TeamMember["department"][] = [
+  "Leadership",
+  "Sales",
+  "Development",
+  "Technical",
+];
+
+
 
 
 interface Review {
@@ -338,37 +494,52 @@ const About = () => {
             span="team"
             description="The people behind Movec, working every day to keep our clients connected, secure and supported." />
 
-          <div
-            className="
-              py-16
-              px-4
-              sm:px-6
-              grid
-              grid-cols-2
-              sm:grid-cols-3
-              lg:grid-cols-4
-              gap-8
-              md:gap-10">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="flex flex-col items-center text-center">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  loading="lazy"
-                  className="w-28 h-28 sm:w-32 sm:h-32 border-4 border-orange-500 aspect-square object-cover rounded-full shadow-lg hover:scale-105 transition-transform duration-300" />
-                <h3 className="mt-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
-                  {member.name}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                  {member.role}
-                </p>
-              </div>
-            ))}
+          <div className="py-16 px-4 sm:px-6">
+
+            {
+              departmentOrder.map((department) => {
+                const members = teamMembers.filter((m) => m.department === department);
+                if (members.length === 0) return null;
+
+                return (
+                  <div key={department} className="mb-14 last:mb-0">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-6 text-center sm:text-left">
+                      {department} Team
+                    </h3>
+                    <div
+                      className="
+                    grid
+                    grid-cols-2
+                    sm:grid-cols-3
+                    lg:grid-cols-4
+                    gap-8
+                    md:gap-10">
+                      {members.map((member, index) => (
+                        <div key={index} className="flex flex-col items-center text-center">
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            loading="lazy"
+                            className="w-28 h-28 sm:w-32 sm:h-32 border-4 border-orange-500 aspect-square object-cover rounded-full shadow-lg hover:scale-105 transition-transform duration-300" />
+                          <h3 className="mt-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
+                            {member.name}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                            {member.role}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })
+            }
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Reviews Section */}
+
       <section
         id="reviews"
         className="
@@ -574,7 +745,6 @@ const About = () => {
               </form>
             </div>
           </div>
-
         </div>
       </section>
     </>
