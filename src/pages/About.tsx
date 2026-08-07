@@ -72,12 +72,6 @@ const teamMembers: TeamMember[] = [
     role: "Operations Manager",
   },
   {
-    image: "/images/Amos,marketing.jpeg",
-    name: "Amos M",
-    role: "Sales & Marketing Lead",
-  },
-
-  {
     image: "/images/ruth_kibet.jpeg",
     name: "Ruth K",
     role: "Sales Marketer",
@@ -93,6 +87,24 @@ const teamMembers: TeamMember[] = [
     role: "Senior Software Developer",
   },
 
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Hassan F",
+    role: "Senior Software Developer",
+  },
+
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Fidel M",
+    role: "Software Developer",
+  },
+
+
+  {
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Moses K",
+    role: "Project Manager",
+  },
   {
     image: "/images/About (2).webp ",
     name: "Hassan F",
@@ -115,41 +127,13 @@ const teamMembers: TeamMember[] = [
     name: "Francis M",
     role: "Junior Software Developer",
   },
-  {
-    image: "/images/joe_soft.png",
-    name: "Joe W",
-    role: "Software Developer",
-  },
-  {
-    image: "/images/Screenshot 2026-08-06 101430.png",
-    name: "Collins K",
-    role: "Lead Technical Engineer",
-  },
-  {
-    image: "/images/Screenshot 2026-08-06 102300.png",
-    name: "Kelvin K",
-    role: "Technical Engineer",
-  },
-  {
-    image: "/images/Screenshot 2026-08-06 101237.png",
-    name: "Francis K",
-    role: "Technical Engineer",
-  },
+
+
 
   {
-    image: "/images/esther.jpeg ",
-    name: "Esther N",
-    role: "Help Desk Support/Software Developer",
-  },
-  {
-    image: "/images/mark.jpeg ",
-    name: "Mark M",
-    role: "Sales Marketer",
-  },
-  {
-    image: "/images/hr&admin.jpeg",
-    name: "Zilpha O",
-    role: "HR Admin Manager",
+    image: "/images/istockphoto-2151669184-612x612.jpg",
+    name: "Kelvin K",
+    role: "Lead Technical Engineer",
   },
 
 ];
