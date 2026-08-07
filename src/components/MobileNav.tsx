@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
@@ -50,8 +50,21 @@ const serviceLinks = [
 ];
 
 const MobileNav: React.FC<Props> = ({ showNav, closeNav }) => {
-  const navOpen = showNav ? "translate-x-0" : "translate-x-full";
+  const navOpen = showNav
+    ? "translate-x-0 visible opacity-100 pointer-events-auto"
+    : "translate-x-full invisible opacity-0 pointer-events-none";
   const [servicesOpen, setServicesOpen] = useState(false);
+
+  useEffect(() => {
+    if (showNav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showNav]);
 
   const navLinks = [
     { name: "Explore", link: "/" },
@@ -80,31 +93,26 @@ const MobileNav: React.FC<Props> = ({ showNav, closeNav }) => {
           }
         `} />
 
-      {/* Sidebar */}
+      {/* Full-screen Mobile Navigation Drawer */}
       <div
         className={`
           fixed
-          top-0
-          right-0
+          inset-0
           h-screen
-          w-[85%]
-          sm:w-[380px]
+          w-full
 
-          bg-white
-          dark:bg-[#0b1120]
-
-          border-l
-          border-slate-200
-          dark:border-slate-700
+          bg-white/98
+          dark:bg-[#0b1120]/98
+          backdrop-blur-xl
 
           shadow-2xl
 
           transform
           ${navOpen}
 
-          transition-transform
-          duration-500
-          ease-in-out
+          transition-all
+          duration-300
+          ease-out
 
           z-50
 

@@ -17,17 +17,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fading "MOVEC" brand watermark in `Footer.tsx` using top-to-bottom CSS mask gradient, positioned above the copyright bar
 - Subtle tech/circuit doodle repeating background pattern baked directly into page sections via `.bg-doodle` utility in `index.css` and `AlternatingSection.tsx` with static `background-attachment: fixed`
 - Bi-directional scroll-triggered stream-in animations in `StreamingCard.tsx` (re-animates smoothly when scrolling up/down), GPU acceleration, and 4-stage sequential slide-in from left in `Hero.tsx` ("Grow your ISP business" → "without / the hustle" → Description → CTA Buttons) with "without" placed on Line 1 next to "business"
+- Embedded interactive Google Maps iframe of SMK Business Park, Enterprise Road, Nairobi on `/contact` page (`Contacts.tsx`) — fully pannable/zoomable inline with an "Open in Google Maps" link; no API key required
 
 ### Changed
 - Updated hero header elements from `<h2>` to `<h1>` in `HeroHeader.tsx` and `Contacts.tsx` to establish proper `<h1>` heading structure across all pages
 - Added explicit type annotations for Firestore snapshot listeners in `About.tsx`
 - Redesigned image card containers in `AlternatingSection.tsx` replacing harsh diagonal clip-path polygons with sleek `rounded-2xl` borders, ambient blur glows (`from-orange-500/30 via-[#10B982]/25`), and subtle hover scale interactions
+- Upgraded `MobileNav.tsx` to a sleek 100% full-screen menu overlay with backdrop blur (`backdrop-blur-xl`), locking background body scroll while open and eliminating duplicate logo visibility on mobile screens
 
 ### Fixed
 - Resolved WebAIM (WAVE) accessibility alerts ("No page regions" and "No heading structure") across all site routes
 - Fixed Vite import resolution error for `react-icons` submodules by restoring missing dependencies and clearing pre-bundle cache
 - Fixed `Footer.tsx` corruption caused by misplaced watermark inside Quick Links section and duplicate `export default Footer` that caused a blank white screen
 - Eliminated initial scroll lag by removing performance-heavy `background-attachment: fixed` from `.bg-doodle` in `index.css` and setting instant-pre-trigger `rootMargin: "0px 0px 50px 0px"` in `StreamingCard.tsx`
+- Fixed mobile horizontal viewport overflow gap by enforcing strict `overflow-x: hidden` on `html`, `body`, `#root`, `<main>`, and `<header>`, adding `invisible pointer-events-none` when `MobileNav` is closed, and scaling mobile horizontal offsets in `StreamingCard.tsx`
+- Fixed syntax error in `Navbar.tsx` on line 16 by replacing typo `pinterface` with `interface`
+- Contact form in `Contacts.tsx` now automatically clears all fields and validation errors after successful submission via `useEffect` watching `state.succeeded`
 
 ---
 

@@ -46,11 +46,11 @@ const StreamingCard = ({
       case "left":
         return isVisible
           ? "opacity-100 translate-x-0"
-          : "opacity-0 -translate-x-16 md:-translate-x-24";
+          : "opacity-0 -translate-x-4 md:-translate-x-24";
       case "right":
         return isVisible
           ? "opacity-100 translate-x-0"
-          : "opacity-0 translate-x-16 md:translate-x-24";
+          : "opacity-0 translate-x-4 md:translate-x-24";
       case "fade":
         return isVisible
           ? "opacity-100 scale-100"

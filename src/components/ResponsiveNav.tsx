@@ -9,7 +9,7 @@ const ResponsiveNav = () => {
   const closeNav = () => setShowNav(false);
 
   return (
-    <header role="banner">
+    <header role="banner" className="overflow-x-hidden w-full max-w-full">
       <Navbar openNav={openNav} />
 
       <MobileNav
