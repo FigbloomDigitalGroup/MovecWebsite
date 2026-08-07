@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import StreamingCard from "../StreamingContent/StreamingCard";
 
 interface AlternatingSectionProps {
   id: string;
@@ -42,42 +43,48 @@ const AlternatingSection = ({
             ${reverse ? "lg:[&>*:first-child]:order-2" : ""}
           `}>
           {/* Text Content */}
-          <div>
-            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
-              {eyebrow}
-            </span>
-            <h2
-              className={`
-                mt-4
-                text-4xl
-                md:text-5xl
-                font-bold
-                ${isDark ? "text-white" : "text-slate-900 dark:text-white"}
-              `}>
-              {title}
-              <span className="text-[#10B982]"> {span}</span>
-            </h2>
+          <StreamingCard delay={100} direction={reverse ? "right" : "left"}>
+            <div>
+              <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+                {eyebrow}
+              </span>
+              <h2
+                className={`
+                  mt-4
+                  text-4xl
+                  md:text-5xl
+                  font-bold
+                  ${isDark ? "text-white" : "text-slate-900 dark:text-white"}
+                `}>
+                {title}
+                <span className="text-[#10B982]"> {span}</span>
+              </h2>
 
-            <p
-              className={`
-                mt-5
-                leading-7
-                ${isDark ? "text-gray-400" : "text-slate-600 dark:text-slate-400"}
-              `}>
-              {description}
-            </p>
+              <p
+                className={`
+                  mt-5
+                  leading-7
+                  ${isDark ? "text-gray-400" : "text-slate-600 dark:text-slate-400"}
+                `}>
+                {description}
+              </p>
 
-            <div className="w-24 h-1 bg-orange-500 my-6" />
-            {children}
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-orange-500/10 to-[#10B982]/10 rounded-2xl -z-10" />
-            <img
-              src={image}
-              alt={title}
-              loading="lazy"
-              className="w-full h-[420px] object-cover [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]"/>
-          </div>
+              <div className="w-24 h-1 bg-orange-500 my-6" />
+              {children}
+            </div>
+          </StreamingCard>
+
+          {/* Image */}
+          <StreamingCard delay={250} direction="fade">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-br from-orange-500/10 to-[#10B982]/10 rounded-2xl -z-10" />
+              <img
+                src={image}
+                alt={title}
+                loading="lazy"
+                className="w-full h-[420px] object-cover [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]"/>
+            </div>
+          </StreamingCard>
         </div>
       </div>
     </section>

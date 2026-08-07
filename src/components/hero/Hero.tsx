@@ -1,5 +1,6 @@
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import StreamingCard from "../StreamingContent/StreamingCard";
 
 const Hero = () => {
   return (
@@ -20,57 +21,73 @@ const Hero = () => {
       <div className="relative z-10 w-full px-6 flex justify-start">
         <div className="max-w-5xl text-start mx-auto px-8">
           <h1 className="mt-4 text-4xl md:text-6xl lg:text-6xl font-bold leading-tight text-white">
-            Grow your ISP business{" "}
-            <span className="text-orange-500">
-              without the
+            {/* RED: Grow your ISP business */}
+            <StreamingCard delay={150} direction="left" duration={900} className="inline">
+              <span>Grow your ISP business </span>
+            </StreamingCard>{" "}
+
+            {/* GREEN: without the hustle */}
+            <StreamingCard delay={450} direction="left" duration={900} className="inline text-orange-500">
+              <span>without</span>
               <br />
-              hustle
-            </span>
+              <span>the hustle</span>
+            </StreamingCard>
           </h1>
-          <div className="w-24 h-1 bg-orange-500 my-6" />
-          <p className="max-w-2xl text-lg leading-8 text-gray-300">
-            The complete management system for ISPs. Automate your billing,
-            manage your routers and grow your customer base without the
-            daily stress backed by the same team handling your networking,
-            security and connectivity infrastructure.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-start gap-4">
-            <Link
-              to="/contact"
-              className="
-                flex
-                items-center
-                gap-3
-                cursor-pointer
-                px-7
-                py-3
-                bg-orange-500
-                hover:bg-orange-600
-                text-white
-                font-medium
-                transition-colors
-                duration-200">
-              Get Started
-              <FaArrowRight />
-            </Link>
 
-            <Link
-              to="/ispplatform"
-              className="
-                px-7
-                py-3
-                cursor-pointer
-                border
-                border-white/40
-                hover:border-white
-                text-white
-                font-medium
-                transition-colors
-                duration-200">
-              Explore Platform
-            </Link>
+          {/* GREEN ACCENT LINE */}
+          <StreamingCard delay={550} direction="left" duration={800}>
+            <div className="w-24 h-1 bg-orange-500 my-6" />
+          </StreamingCard>
 
-          </div>
+          {/* WHITE: Paragraph description */}
+          <StreamingCard delay={750} direction="left" duration={900}>
+            <p className="max-w-2xl text-lg leading-8 text-gray-300">
+              The complete management system for ISPs. Automate your billing,
+              manage your routers and grow your customer base without the
+              daily stress backed by the same team handling your networking,
+              security and connectivity infrastructure.
+            </p>
+          </StreamingCard>
+
+          {/* BLUE: CTA Buttons */}
+          <StreamingCard delay={1050} direction="left" duration={900}>
+            <div className="mt-10 flex flex-wrap justify-start gap-4">
+              <Link
+                to="/contact"
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  cursor-pointer
+                  px-7
+                  py-3
+                  bg-orange-500
+                  hover:bg-orange-600
+                  text-white
+                  font-medium
+                  transition-colors
+                  duration-200">
+                Get Started
+                <FaArrowRight />
+              </Link>
+
+              <Link
+                to="/ispplatform"
+                className="
+                  px-7
+                  py-3
+                  cursor-pointer
+                  border
+                  border-white/40
+                  hover:border-white
+                  text-white
+                  font-medium
+                  transition-colors
+                  duration-200">
+                Explore Platform
+              </Link>
+            </div>
+          </StreamingCard>
         </div>
       </div>
     </section>

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Schema.org JSON-LD structured data and custom `<Seo>` meta tags across all sub-service pages (`Software`, `Billing`, `Starlink`, `CCTV`, `GPS`, `IT Support`)
 - Fading "MOVEC" brand watermark in `Footer.tsx` using top-to-bottom CSS mask gradient, positioned above the copyright bar
 - Subtle tech/circuit doodle repeating background pattern baked directly into page sections via `.bg-doodle` utility in `index.css` and `AlternatingSection.tsx` with static `background-attachment: fixed`
+- Bi-directional scroll-triggered stream-in animations in `StreamingCard.tsx` (re-animates smoothly when scrolling up/down), GPU acceleration, and 4-stage sequential slide-in from left in `Hero.tsx` ("Grow your ISP business" → "without / the hustle" → Description → CTA Buttons) with "without" placed on Line 1 next to "business"
 
 ### Changed
 - Updated hero header elements from `<h2>` to `<h1>` in `HeroHeader.tsx` and `Contacts.tsx` to establish proper `<h1>` heading structure across all pages
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Resolved WebAIM (WAVE) accessibility alerts ("No page regions" and "No heading structure") across all site routes
 - Fixed Vite import resolution error for `react-icons` submodules by restoring missing dependencies and clearing pre-bundle cache
 - Fixed `Footer.tsx` corruption caused by misplaced watermark inside Quick Links section and duplicate `export default Footer` that caused a blank white screen
+- Eliminated initial scroll lag by removing performance-heavy `background-attachment: fixed` from `.bg-doodle` in `index.css` and setting instant-pre-trigger `rootMargin: "0px 0px 50px 0px"` in `StreamingCard.tsx`
 
 ---
 
