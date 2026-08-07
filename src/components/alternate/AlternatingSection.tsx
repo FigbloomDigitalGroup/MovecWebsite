@@ -76,13 +76,21 @@ const AlternatingSection = ({
 
           {/* Image */}
           <StreamingCard delay={250} direction="fade">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-orange-500/10 to-[#10B982]/10 rounded-2xl -z-10" />
-              <img
-                src={image}
-                alt={title}
-                loading="lazy"
-                className="w-full h-[420px] object-cover [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]"/>
+            <div className="relative group">
+              {/* Ambient Glow Backdrop */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-orange-500/30 via-[#10B982]/25 to-orange-500/30 rounded-[24px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+
+              {/* Image Card Container */}
+              <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800/80 shadow-2xl bg-slate-900/40 backdrop-blur-sm transition-transform duration-500 group-hover:scale-[1.015]">
+                <img
+                  src={image}
+                  alt={title}
+                  loading="lazy"
+                  className="w-full h-[400px] md:h-[440px] object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Subtle Depth Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+              </div>
             </div>
           </StreamingCard>
         </div>

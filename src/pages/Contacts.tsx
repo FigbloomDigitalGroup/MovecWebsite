@@ -2,7 +2,7 @@ import { FaArrowRight, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCheckCircle } from
 import { useForm, ValidationError } from "@formspree/react";
 import { Seo } from "../components/SEO/Seo";
 import Faq from "../components/Faq/Faq";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Contacts = () => {
 
@@ -19,6 +19,23 @@ const Contacts = () => {
     subject: "",
     message: "",
   });
+
+  useEffect(() => {
+    if (state.succeeded) {
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      setErrors({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    }
+  }, [state.succeeded]);
 
   const validateField = (name: string, value: string) => {
     let error = "";
@@ -498,6 +515,56 @@ const Contacts = () => {
 
           </div>
 
+          {/* Interactive Location Map */}
+          <div className="mt-16 pt-10 border-t border-slate-200 dark:border-white/10">
+            <div className="text-center mb-8">
+              <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+                Find Us
+              </span>
+              <h2 className="mt-3 text-2xl font-bold text-slate-900 dark:text-white">
+                Our Location
+              </h2>
+              <p className="mt-2 text-slate-500 dark:text-slate-400 text-sm">
+                SMK Business Park, Enterprise Road — Nairobi, Kenya
+              </p>
+            </div>
+
+            <div className="relative group rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
+              {/* Ambient glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/20 via-[#10B982]/15 to-orange-500/20 rounded-[20px] blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+
+              {/* Map iframe */}
+              <iframe
+                title="Movec Connect Location — SMK Business Park, Enterprise Road, Nairobi"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7977.523360282421!2d36.86498177190721!3d-1.318664213917522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11106d5a3af9%3A0x22ba9675e0a9144e!2sSMK%20Business%20Centre!5e0!3m2!1sen!2ske!4v1786104293485!5m2!1sen!2ske"
+                width="100%"
+                height="420"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-[300px] md:h-[420px]"
+              />
+
+              {/* Bottom overlay bar */}
+              <div className="flex items-center justify-between px-5 py-3 bg-white dark:bg-[#0b1120] border-t border-slate-100 dark:border-white/10">
+                <div className="flex items-center gap-2">
+                  <FaMapMarkerAlt className="text-orange-500 text-sm shrink-0" />
+                  <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">
+                    SMK Business Park, Enterprise Road, Nairobi
+                  </span>
+                </div>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=SMK+Business+Park+Enterprise+Road+Nairobi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-orange-500 font-semibold hover:underline whitespace-nowrap ml-4 shrink-0"
+                >
+                  Open in Google Maps →
+                </a>
+              </div>
+            </div>
+          </div>
 
         </div>
 
