@@ -359,3 +359,11 @@ When requesting features, include:
 ---
 
 **Thank you for contributing to Movec!**
+
+### Common mistake: "No commits between X and Y"
+
+If you commit directly to your own branch out of habit (before making the topic branch), then create the topic branch *afterward*, it starts out identical to your branch — there's nothing to diff, so `gh pr create` fails with something like:
+```
+pull request create failed: GraphQL: No commits between dev/cozy and cozy-topic
+```
+The fix: create the topic branch **first**, then make your changes and commit **on the topic branch** — never commit directly to your own named branch (`dev/cozy`, `dev/frank`, etc.), even though old habit makes that tempting. If you've already hit this, just make an actual change on the topic branch (edit a file, commit again) before opening the PR.
