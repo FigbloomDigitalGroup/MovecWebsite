@@ -23,16 +23,33 @@ winget install --id GitHub.cli   # or your OS's equivalent
 gh auth login
 ```
 
-### Working on your own branch
+### Walkthrough: Cozy working on `dev/cozy`
 
-Push to a fresh topic branch, then PR it into your own branch and self-merge — no one else needs to approve:
-
+Cozy **cannot** do this anymore — it will be rejected, even though it's their own branch:
 ```bash
-git checkout -b dev-yourname-whatever-youre-doing
-git push -u origin dev-yourname-whatever-youre-doing
-gh pr create --base dev/yourname --title "..." --body "..."
-gh pr merge --auto --squash
+git checkout dev/cozy
+git commit -am "some change"
+git push                          # ❌ rejected: "Changes must be made through a pull request"
 ```
+
+Instead, they work on a throwaway topic branch, and PR *that* into `dev/cozy`:
+```bash
+git checkout dev/cozy
+git pull
+git checkout -b cozy-topic             # 1. new branch, off dev/cozy
+git commit -am "some change"           # 2. commit here — can be multiple commits over time,
+git commit -am "another change"        #    keep working on this branch as long as you're mid-task
+git push -u origin cozy-topic          # 3. push THIS branch — allowed, it has no protection rule
+
+gh pr create --base dev/cozy --title "..." --body "..."   # 4. PR: cozy-topic → dev/cozy
+gh pr merge --auto --squash                                # 5. merges automatically, no approval needed
+
+git checkout dev/cozy && git pull      # 6. sync back up, then delete the topic branch
+git branch -d cozy-topic
+git push origin --delete cozy-topic
+```
+
+You don't need a new topic branch per commit — just per chunk of work you're ready to land on your branch.
 
 ### Landing something on main
 
