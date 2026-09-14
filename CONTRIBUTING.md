@@ -44,9 +44,9 @@ git push -u origin cozy-topic          # 3. push THIS branch — allowed, it has
 gh pr create --base dev/cozy --title "..." --body "..."   # 4. PR: cozy-topic → dev/cozy
 gh pr merge --auto --squash                                # 5. merges automatically, no approval needed
 
-git checkout dev/cozy && git pull      # 6. sync back up, then delete the topic branch
-git branch -d cozy-topic
-git push origin --delete cozy-topic
+git checkout dev/cozy && git pull      # 6. sync back up
+git branch -d cozy-topic                #    delete your LOCAL copy of the topic branch
+# no need to delete it on GitHub -- it's auto-deleted the moment the PR merges
 ```
 
 You don't need a new topic branch per commit — just per chunk of work you're ready to land on your branch.
