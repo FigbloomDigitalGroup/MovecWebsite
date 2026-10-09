@@ -4,6 +4,68 @@ Thank you for contributing to the Movec Landing Page project! This document prov
 
 ---
 
+## Branch protection: no direct pushes, anywhere
+
+No one can `git push` directly to *any* branch on this repo anymore — not `main`, and not your own personal branch (`dev/cozy`, `dev/frank`, etc.) either. Everything lands via a pull request.
+
+### Why
+
+A supply-chain incident (September 2026) got in by pushing straight to branches with write access — including personal branches, not just `main`. An obfuscated payload was injected into `eslint.config.js` (auto-executes on `dev`/`build`/`lint`), and `.gitignore` was weakened to stop excluding `.env`. It happened twice, hitting nearly every branch across the org both times.
+
+If personal branches stayed pushable, that's still an open door for the same thing to happen again and quietly work its way into `main` later via a normal PR. Requiring a PR for every branch — even a self-merged, zero-approval one on your own branch — means any write has to go through GitHub's merge API, which a stolen token can't silently bypass the way a raw push could.
+
+Force-push and branch deletion are blocked permanently on every branch, for everyone, admins included. That's not getting relaxed later.
+
+### One-time setup
+
+```bash
+winget install --id GitHub.cli   # or your OS's equivalent
+gh auth login
+```
+
+### Walkthrough: Cozy working on `dev/cozy`
+
+Cozy **cannot** do this anymore — it will be rejected, even though it's their own branch:
+```bash
+git checkout dev/cozy
+git commit -am "some change"
+git push                          # ❌ rejected: "Changes must be made through a pull request"
+```
+
+Instead, they work on a throwaway topic branch, and PR *that* into `dev/cozy`:
+```bash
+git checkout dev/cozy
+git pull
+git checkout -b cozy-topic             # 1. new branch, off dev/cozy
+git commit -am "some change"           # 2. commit here — can be multiple commits over time,
+git commit -am "another change"        #    keep working on this branch as long as you're mid-task
+git push -u origin cozy-topic          # 3. push THIS branch — allowed, it has no protection rule
+
+gh pr create --base dev/cozy --title "..." --body "..."   # 4. PR: cozy-topic → dev/cozy
+gh pr merge --auto --squash                                # 5. merges automatically, no approval needed
+
+git checkout dev/cozy && git pull      # 6. sync back up
+git branch -d cozy-topic                #    delete your LOCAL copy of the topic branch
+# no need to delete it on GitHub -- it's auto-deleted the moment the PR merges
+```
+
+You don't need a new topic branch per commit — just per chunk of work you're ready to land on your branch.
+
+### Landing something on main
+
+Same shape, but `main` needs 1 approval before it merges:
+
+```bash
+git checkout -b fix/whatever
+git push -u origin fix/whatever
+gh pr create --base main --title "..." --body "..."
+gh pr merge --auto --squash
+```
+
+It sits until someone runs `gh pr review <number> --approve` (or approves from the GitHub web UI), then merges automatically.
+
+---
+
 ## Branch Naming Conventions
 
 Use descriptive branch names that follow this pattern:
@@ -297,3 +359,11 @@ When requesting features, include:
 ---
 
 **Thank you for contributing to Movec!**
+
+### Common mistake: "No commits between X and Y"
+
+If you commit directly to your own branch out of habit (before making the topic branch), then create the topic branch *afterward*, it starts out identical to your branch — there's nothing to diff, so `gh pr create` fails with something like:
+```
+pull request create failed: GraphQL: No commits between dev/cozy and cozy-topic
+```
+The fix: create the topic branch **first**, then make your changes and commit **on the topic branch** — never commit directly to your own named branch (`dev/cozy`, `dev/frank`, etc.), even though old habit makes that tempting. If you've already hit this, just make an actual change on the topic branch (edit a file, commit again) before opening the PR.
