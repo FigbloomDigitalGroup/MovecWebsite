@@ -91,12 +91,6 @@ const teamMembers: TeamMember[] = [
 
   // Sales Team
   {
-    image: "/images/Amos,marketing.jpeg",
-    name: "Amos M",
-    role: "Lead Sales Marketer",
-    department: "Sales",
-  },
-  {
     image: "/images/ruth_kibet.jpeg",
     name: "Ruth K",
     role: "Sales Marketer",
