@@ -45,7 +45,7 @@ const serviceLinks = [
   {
     name: "IT Support & Networking",
     icon: FaNetworkWired,
-    link: "/itSupport",
+    link: "/itsupport",
   },
 ];
 

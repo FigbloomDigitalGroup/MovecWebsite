@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   addDoc,
   collection,
@@ -17,7 +18,7 @@ import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
 import { LiaAlignRightSolid } from "react-icons/lia";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaArrowRight } from "react-icons/fa";
 import { Seo } from "../components/SEO/Seo";
 
 interface AboutItem {
@@ -305,7 +306,7 @@ const About = () => {
     <>
       <Seo
         title="About Us | Movec - Our Story"
-        description="Movec was built to make choosing an internet provider simple and transparent, helping people compare real plans and prices without the guesswork."
+        description="Movec Connect builds reliable technology solutions for businesses — including an all-in-one platform that helps ISPs manage billing, routers and customers from one place."
         path="/about" />
 
       <section
@@ -363,6 +364,70 @@ const About = () => {
             {aboutItems.map((item, index) => (
               <AboutCard key={index} item={item} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why We Built The ISP Platform */}
+      <section
+        id="isp-platform-story"
+        className="
+          py-20
+          bg-white
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+              Why We Built It
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Our ISP Platform started with
+              <span className="text-[#10B982]"> a problem we kept hearing</span>
+            </h2>
+            <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
+              ISP operators kept telling us the same things: reconciling
+              M-Pesa payments by hand, juggling a different dashboard for
+              every router brand on the network, and no real way to see
+              what was actually happening on their network in real time.
+              So we built Movec Connect — one platform for billing,
+              routers and monitoring, instead of five.
+            </p>
+            <p className="mt-4 leading-7 text-slate-600 dark:text-slate-400">
+              It's built by the same team handling networking, security
+              and connectivity work for our clients every day — so every
+              feature comes from a real operational headache, not a guess.
+            </p>
+            <Link
+              to="/ispplatform"
+              className="
+                mt-8
+                inline-flex
+                items-center
+                gap-3
+                cursor-pointer
+                px-7
+                py-3
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                font-medium
+                transition-colors
+                duration-200
+                w-fit">
+              Explore the ISP Platform
+              <FaArrowRight />
+            </Link>
+          </div>
+
+          <div className="relative h-80 lg:h-96 overflow-hidden rounded-sm [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]">
+            <img
+              src="/images/geralt-remote-control-6497147_1920.jpg"
+              alt="Remote network monitoring and router management"
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </section>
