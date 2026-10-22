@@ -18,6 +18,8 @@ const IspPlatform = lazy(() => import("./pages/IspPlatform"));
 const Services = lazy(() => import("./pages/Services"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contacts"));
+const News = lazy(() => import("./pages/News"));
+const Projects = lazy(() => import("./pages/Projects"));
 const Software = lazy(() => import("./pages/subPages/Software"));
 const Billing = lazy(() => import("./pages/subPages/Billing"));
 const Starlink = lazy(() => import("./pages/subPages/Starlink"));
@@ -53,6 +55,8 @@ const App: React.FC = () => {
              <Route  path="/services" element={<Services/>}/>
              <Route path="/about" element={<About/>}/>
              <Route path="/contact" element={<Contact/>}/>
+             <Route path="/news" element={<News/>}/>
+             <Route path="/projects" element={<Projects/>}/>
              <Route path="/software" element={<Software/>}/>
              <Route path="/billing" element={<Billing/>}/>
              <Route path="/starlink" element={<Starlink/>}/>
