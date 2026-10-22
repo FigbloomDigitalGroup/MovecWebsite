@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import type { FormEvent } from "react";
-import { FiX, FiSend } from "react-icons/fi";
+import { FiSend } from "react-icons/fi";
 import { RiRobot3Fill } from "react-icons/ri";
 
 /**
