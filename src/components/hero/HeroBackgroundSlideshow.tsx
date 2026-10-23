@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
-const SLIDES = [
-  "/images/pexels-margo-evardson-2158292018-37166577.jpg",
-  "/images/u_grs7xmagi8-ai-generated-9449768.jpg",
-  "/images/geralt-binary-3725329.jpg",
-  "/images/pexels-rafa-sants-3818665-5790645.jpg",
-  "/images/innovalabs-software-development-6523979.jpg",
-  "/images/webtechexperts-cctv-surveillance-camera-7267551_1920.jpg",
+const DEFAULT_SLIDES = [
+  "/images/geralt-cloud-3843352_1920.jpg",
+  "/images/thedigitalartist-internet-1676139_1920.jpg",
+  "/images/geralt-blue-light-1675686_1920.jpg",
+  "/images/clarkdonald413-linux-4259595.jpg",
 ];
 
 const SLIDE_DURATION = 5000;
@@ -16,22 +14,27 @@ const SLIDE_DURATION = 5000;
  * -----------------------------------------------------------------------
  * Cross-fades between a fixed set of background images — each one fades
  * in over the last rather than sliding/swiping past it. Replaces the
- * hero's old looping video background.
+ * hero's old looping video background. Pass `slides` to use a different
+ * set of images (e.g. the About page hero).
  * -----------------------------------------------------------------------
  */
-const HeroBackgroundSlideshow = () => {
+interface Props {
+  slides?: string[];
+}
+
+const HeroBackgroundSlideshow = ({ slides = DEFAULT_SLIDES }: Props) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % SLIDES.length);
+      setIndex((prev) => (prev + 1) % slides.length);
     }, SLIDE_DURATION);
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      {SLIDES.map((src, i) => (
+      {slides.map((src, i) => (
         <img
           key={src}
           src={src}

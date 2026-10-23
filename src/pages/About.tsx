@@ -15,6 +15,7 @@ import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
 import StreamingCard from "../components/StreamingContent/StreamingCard";
+import HeroBackgroundSlideshow from "../components/hero/HeroBackgroundSlideshow";
 import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
@@ -56,6 +57,15 @@ const aboutItems: AboutItem[] = [
   },
 ];
 
+
+const ABOUT_HERO_SLIDES = [
+  "/images/pexels-margo-evardson-2158292018-37166577.jpg",
+  "/images/u_grs7xmagi8-ai-generated-9449768.jpg",
+  "/images/geralt-binary-3725329.jpg",
+  "/images/pexels-rafa-sants-3818665-5790645.jpg",
+  "/images/innovalabs-software-development-6523979.jpg",
+  "/images/webtechexperts-cctv-surveillance-camera-7267551_1920.jpg",
+];
 
 interface TeamMember {
   image: string;
@@ -314,14 +324,10 @@ const About = () => {
         className="
           relative
           py-32
-          bg-cover
-          bg-center
-          bg-fixed
+          overflow-hidden
           flex
-          items-center"
-        style={{
-          backgroundImage: "url('images/graphixmade-ai-generated-8990043.png ')",
-        }}>
+          items-center">
+        <HeroBackgroundSlideshow slides={ABOUT_HERO_SLIDES} />
         <div className="absolute inset-0 bg-black/70" />
 
         {/* Hero Content */}
