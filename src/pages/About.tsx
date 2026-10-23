@@ -15,6 +15,7 @@ import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
 import TeamCarousel from "../components/cards/TeamCarousel";
+import { technicalProjects } from "../dummydata/TechnicalProjects";
 import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
@@ -56,43 +57,6 @@ const aboutItems: AboutItem[] = [
   },
 ];
 
-
-const technicalProjects = [
-  {
-    badge: "Ongoing",
-    ongoing: true,
-    title: "WiFi & Internet Installation",
-    description:
-      "Our technical team is currently rolling out WiFi and internet connections for homes and businesses — from site survey to a live, tested connection.",
-    points: [
-      "Site surveys and coverage planning",
-      "Router, access point and cabling installation",
-      "Fibre, wireless and Starlink connectivity",
-      "Testing, handover and ongoing support",
-    ],
-    image: "/images/pexels-margo-evardson-2158292018-37166577.jpg",
-    imageAlt: "Internet and WiFi network installation",
-    link: "/contact",
-    linkLabel: "Request an installation",
-  },
-  {
-    badge: "What we do best",
-    ongoing: false,
-    title: "CCTV Installation",
-    description:
-      "We're experts at CCTV installation — designing and fitting camera systems that keep homes, offices and business premises secure around the clock.",
-    points: [
-      "Security assessment and camera placement",
-      "HD indoor and outdoor camera installation",
-      "Remote viewing on your phone or computer",
-      "Maintenance and system upgrades",
-    ],
-    image: "/images/elasticcomputefarm-cctv-1144366.jpg",
-    imageAlt: "CCTV security camera installation",
-    link: "/cctv",
-    linkLabel: "Explore CCTV services",
-  },
-];
 
 const storeProducts = [
   {
