@@ -74,7 +74,7 @@ const NewsletterSubscribe = ({ variant = "dark" }: Props) => {
         className={`text-sm font-medium ${
           isDark ? "text-[#10B982]" : "text-[#0d7a5f]"
         }`}>
-        You're subscribed! Look out for tech updates, AI news, security tips and news from Movec.
+        You're subscribed — we'll keep you posted on Movec news and events.
       </p>
     );
   }
