@@ -1,44 +1,24 @@
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
-import NewsCard from "../components/cards/NewsCard";
 import NewsletterSubscribe from "../components/widgets/NewsletterSubscribe";
 import { Seo } from "../components/SEO/Seo";
 
-interface NewsItem {
-  image: string;
-  category: string;
-  date: string;
-  title: string;
-  excerpt: string;
-}
-
-// PLACEHOLDER CONTENT — swap these out for real announcements/updates.
-const newsItems: NewsItem[] = [
-  {
-    image: "/images/ar130405-business-2082639_1920.jpg",
-    category: "Company",
-    date: "Placeholder date",
-    title: "Sample announcement headline goes here",
-    excerpt:
-      "Short summary of the update goes here — a sentence or two describing what happened and why it matters to clients.",
-  },
-  {
-    image: "/images/geralt-business-5205180.jpg",
-    category: "Services",
-    date: "Placeholder date",
-    title: "Another sample news headline",
-    excerpt:
-      "Replace with a real update about a new service, partnership, or milestone once it's ready to publish.",
-  },
-  {
-    image: "/images/stakalo-ai-generated-8433540.jpg",
-    category: "Team",
-    date: "Placeholder date",
-    title: "A third sample entry for layout purposes",
-    excerpt:
-      "This grid is built to hold any number of entries — add or remove items from the newsItems array as needed.",
-  },
-];
+// Featured news post. The image is a full poster, so it's shown uncropped.
+const featuredNews = {
+  image: "/images/figbloom-vision-smart-security-booth.jpg",
+  imageAlt:
+    "Figbloom Vision Smart Security Systems exhibition booth with AI-powered recognition, Figillance app, security agency coordination and smart asset & threat detection",
+  category: "Smart Security",
+  title: "Figbloom Vision: Smart Security Systems",
+  excerpt:
+    "See more. Understand more. Respond faster. Figbloom Vision turns security cameras into smarter surveillance.",
+  features: [
+    "AI-powered recognition",
+    "Figillance app for emergency response",
+    "Security agency coordination",
+    "Smart asset & threat detection",
+  ],
+};
 
 const News = () => {
   return (
@@ -68,7 +48,7 @@ const News = () => {
             eyebrow="News"
             title="What's happening"
             span="at Movec"
-            description="Updates, announcements and milestones from the team — this page is currently populated with placeholder entries."
+            description="Updates, announcements and milestones from the team."
             variant="dark"
             align="center"
           />
@@ -88,15 +68,46 @@ const News = () => {
             eyebrow=""
             title="Latest"
             span="updates"
-            description="Real announcements will replace these placeholders once content is ready."
+            description="The latest from Movec and the Figbloom family."
             align="center"
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            {newsItems.map((item, index) => (
-              <NewsCard key={index} item={item} />
-            ))}
-          </div>
+          <article
+            className="
+              mt-10
+              grid
+              lg:grid-cols-2
+              bg-white
+              dark:bg-gray-900
+              shadow-md
+              overflow-hidden
+              [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]">
+            <img
+              src={featuredNews.image}
+              alt={featuredNews.imageAlt}
+              loading="lazy"
+              className="w-full h-full object-cover" />
+
+            <div className="flex flex-col justify-center p-8 md:p-10">
+              <span className="w-fit bg-orange-500 text-white text-xs font-semibold uppercase tracking-wider px-3 py-1">
+                {featuredNews.category}
+              </span>
+              <h3 className="mt-5 text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                {featuredNews.title}
+              </h3>
+              <p className="mt-4 leading-7 text-gray-600 dark:text-gray-300">
+                {featuredNews.excerpt}
+              </p>
+              <ul className="mt-6 space-y-3">
+                {featuredNews.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#10B982]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
         </div>
       </section>
 
