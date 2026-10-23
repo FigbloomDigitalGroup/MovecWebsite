@@ -481,12 +481,16 @@ const About = () => {
           </div>
 
           <div className="relative h-80 lg:h-96 overflow-hidden rounded-sm [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]">
-            <img
-              src="/images/geralt-remote-control-6497147_1920.jpg"
-              alt="Remote network monitoring and router management"
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              className="w-full h-full object-cover">
+              <source src="/video/141445-777657273.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </section>
