@@ -57,6 +57,43 @@ const aboutItems: AboutItem[] = [
 ];
 
 
+const technicalProjects = [
+  {
+    badge: "Ongoing",
+    ongoing: true,
+    title: "WiFi & Internet Installation",
+    description:
+      "Our technical team is currently rolling out WiFi and internet connections for homes and businesses — from site survey to a live, tested connection.",
+    points: [
+      "Site surveys and coverage planning",
+      "Router, access point and cabling installation",
+      "Fibre, wireless and Starlink connectivity",
+      "Testing, handover and ongoing support",
+    ],
+    image: "/images/pexels-margo-evardson-2158292018-37166577.jpg",
+    imageAlt: "Internet and WiFi network installation",
+    link: "/contact",
+    linkLabel: "Request an installation",
+  },
+  {
+    badge: "What we do best",
+    ongoing: false,
+    title: "CCTV Installation",
+    description:
+      "We're experts at CCTV installation — designing and fitting camera systems that keep homes, offices and business premises secure around the clock.",
+    points: [
+      "Security assessment and camera placement",
+      "HD indoor and outdoor camera installation",
+      "Remote viewing on your phone or computer",
+      "Maintenance and system upgrades",
+    ],
+    image: "/images/elasticcomputefarm-cctv-1144366.jpg",
+    imageAlt: "CCTV security camera installation",
+    link: "/cctv",
+    linkLabel: "Explore CCTV services",
+  },
+];
+
 interface TeamMember {
   image: string;
   name: string;
@@ -429,6 +466,108 @@ const About = () => {
               loading="lazy"
               className="w-full h-full object-cover"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Technical Team: Ongoing Projects & CCTV */}
+      <section
+        id="technical-projects"
+        className="
+          py-20
+          bg-[#f5f5f5]
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <ContentHeader
+            eyebrow=""
+            title="What our technical team is"
+            span="working on"
+            description="Beyond the platform, our technical team is out in the field every day — connecting homes and businesses and keeping their premises secure." />
+
+          <div className="pt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {technicalProjects.map((project) => (
+              <div
+                key={project.title}
+                className="
+                  flex flex-col
+                  bg-white
+                  dark:bg-white/5
+                  border
+                  border-gray-200
+                  dark:border-white/10
+                  rounded-2xl
+                  overflow-hidden
+                  shadow-sm
+                  hover:shadow-lg
+                  transition-shadow
+                  duration-300">
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    loading="lazy"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <span
+                    className="
+                      absolute top-4 left-4
+                      inline-flex items-center gap-2
+                      px-3 py-1
+                      rounded-full
+                      bg-black/70
+                      text-white
+                      text-xs
+                      font-semibold
+                      uppercase
+                      tracking-wider">
+                    {project.ongoing && (
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-[#10B982] opacity-75 animate-ping" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B982]" />
+                      </span>
+                    )}
+                    {project.badge}
+                  </span>
+                </div>
+
+                <div className="flex flex-col flex-1 p-6 md:p-8">
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+                    {project.description}
+                  </p>
+                  <ul className="mt-5 space-y-2">
+                    {project.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to={project.link}
+                    className="
+                      mt-8
+                      inline-flex
+                      items-center
+                      gap-3
+                      px-6
+                      py-3
+                      bg-orange-500
+                      hover:bg-orange-600
+                      text-white
+                      font-medium
+                      transition-colors
+                      duration-200
+                      w-fit">
+                    {project.linkLabel}
+                    <FaArrowRight />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
