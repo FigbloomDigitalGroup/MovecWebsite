@@ -19,7 +19,9 @@ import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
 import { LiaAlignRightSolid } from "react-icons/lia";
-import { FaStar, FaArrowRight } from "react-icons/fa";
+import { FaStar, FaArrowRight, FaStore } from "react-icons/fa";
+import { BiCctv } from "react-icons/bi";
+import { MdRouter, MdSatelliteAlt } from "react-icons/md";
 import { Seo } from "../components/SEO/Seo";
 
 interface AboutItem {
@@ -91,6 +93,27 @@ const technicalProjects = [
     imageAlt: "CCTV security camera installation",
     link: "/cctv",
     linkLabel: "Explore CCTV services",
+  },
+];
+
+const storeProducts = [
+  {
+    icon: <BiCctv />,
+    title: "CCTV Cameras & Kits",
+    description:
+      "Indoor and outdoor cameras and complete security kits for homes and businesses.",
+  },
+  {
+    icon: <MdRouter />,
+    title: "Routers & WiFi Equipment",
+    description:
+      "Routers, access points and networking gear for reliable home and office WiFi.",
+  },
+  {
+    icon: <MdSatelliteAlt />,
+    title: "Starlink Kits",
+    description:
+      "Starlink kits for fast internet wherever you are, even in remote areas.",
   },
 ];
 
@@ -565,6 +588,91 @@ const About = () => {
                     {project.linkLabel}
                     <FaArrowRight />
                   </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Movec Store */}
+      <section
+        id="movec-store"
+        className="
+          py-20
+          bg-white
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="inline-flex items-center gap-2 text-orange-500 font-semibold uppercase tracking-wider text-sm">
+              <FaStore />
+              Movec Store
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Shop the equipment
+              <span className="text-[#10B982]"> we install every day</span>
+            </h2>
+            <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
+              The Movec Store is our online shop for the same networking,
+              security and connectivity equipment our technical team uses
+              in the field — so you get gear we know and trust.
+            </p>
+            <p className="mt-4 leading-7 text-slate-600 dark:text-slate-400">
+              Buy it on its own, or let our team install and set it up for
+              you. Not sure what you need? Get in touch and we'll help you
+              pick the right products.
+            </p>
+            <Link
+              to="/contact"
+              className="
+                mt-8
+                inline-flex
+                items-center
+                gap-3
+                px-7
+                py-3
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                font-medium
+                transition-colors
+                duration-200
+                w-fit">
+              Contact us to order
+              <FaArrowRight />
+            </Link>
+          </div>
+
+          <div className="grid gap-4">
+            {storeProducts.map((product) => (
+              <div
+                key={product.title}
+                className="
+                  flex
+                  items-start
+                  gap-5
+                  p-6
+                  bg-[#f5f5f5]
+                  dark:bg-white/5
+                  border
+                  border-gray-200
+                  dark:border-white/10
+                  rounded-2xl
+                  hover:border-orange-500
+                  transition-colors
+                  duration-300">
+                <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-orange-500/10 text-orange-500 text-3xl">
+                  {product.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {product.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                    {product.description}
+                  </p>
                 </div>
               </div>
             ))}
