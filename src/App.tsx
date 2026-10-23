@@ -10,6 +10,7 @@ import SkipToContent from "./components/SkipToContent/SkipToContent";
 import PageSkeleton from "./components/Skeleton/PageSkeleton";
 import { usePageTracking } from "./hooks/usePageTracking";
 import { useScrollTracking } from "./hooks/useScrollTracking";
+import ChatbotWidget from "./components/widgets/Chatbotwidget";
 
 // Lazy load pages for better performance
 const Home = lazy(() => import("./pages/Home"));
@@ -68,6 +69,7 @@ const App: React.FC = () => {
     <WhatsAppWidget phoneNumber="254796287392"/>
     <Footer/>
     <ScrollToTop/>
+    <ChatbotWidget />
   </AnalyticsWrapper>
 </Router>
     </>

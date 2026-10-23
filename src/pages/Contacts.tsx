@@ -1,3 +1,4 @@
+import React from "react";
 import { FaArrowRight, FaEnvelope, FaPhone, FaWhatsapp, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { useForm, ValidationError } from "@formspree/react";
 import { Seo } from "../components/SEO/Seo";
@@ -175,9 +176,7 @@ const Contacts = () => {
               Fill out the form below and our team will get back to you within
               a day.
             </p>
-
             <div className="w-24 h-1 bg-orange-500 my-6 mx-auto" />
-
           </div>
 
 
@@ -251,17 +250,12 @@ const Contacts = () => {
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">{errors.email}</p>
                 )}
-
                 <ValidationError
                   prefix="Email"
                   field="email"
                   errors={state.errors} />
-
               </div>
-
             </div>
-
-
             <div>
               <input
                 type="text"
@@ -411,8 +405,6 @@ const Contacts = () => {
             )}
 
           </form>
-
-
 
           {/* Quick Contact Icon Buttons */}
           <div className="mt-12 pt-8 border-t border-slate-200 dark:border-white/10 flex items-center justify-center gap-8 md:gap-12">
