@@ -208,12 +208,24 @@ const departmentOrder: TeamMember["department"][] = [
 
 
 
+// Minimal shapes for the Firestore values this page reads. `firebase/firestore`
+// is declared as an untyped module in vite-env.d.ts, so its own types aren't
+// available here.
+interface FirestoreTimestamp {
+  toMillis(): number;
+}
+
 interface Review {
   id: string;
   name: string;
   rating: number;
   comment: string;
-  createdAt: any;
+  createdAt: FirestoreTimestamp | null;
+  expiresAt?: FirestoreTimestamp;
+}
+
+interface ReviewsSnapshot {
+  docs: { id: string; data(): Omit<Review, "id"> }[];
 }
 
 const About = () => {
@@ -232,7 +244,7 @@ const About = () => {
 
 
   const reviews = rawReviews.filter(
-    (review: any) => !review.expiresAt || review.expiresAt.toMillis() > now.toMillis()
+    (review) => !review.expiresAt || review.expiresAt.toMillis() > now.toMillis()
   );
 
   useEffect(() => {
@@ -245,12 +257,12 @@ const About = () => {
 
     const unsubscribe = onSnapshot(
       q,
-      (snapshot: any) => {
+      (snapshot: ReviewsSnapshot) => {
 
-        const data = snapshot.docs.map((doc: any) => ({
+        const data: Review[] = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as Review[];
+        }));
 
 
         setRawReviews(data);
@@ -258,7 +270,7 @@ const About = () => {
 
       },
 
-      (err: any) => {
+      (err: Error) => {
         console.error("Error fetching reviews:", err);
         setReviewsLoading(false);
       }
