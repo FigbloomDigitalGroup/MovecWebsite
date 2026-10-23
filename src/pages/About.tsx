@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   addDoc,
   collection,
@@ -13,11 +14,13 @@ import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
+import TeamCarousel from "../components/cards/TeamCarousel";
+import { technicalProjects } from "../dummydata/TechnicalProjects";
 import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
 import { LiaAlignRightSolid } from "react-icons/lia";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaArrowRight } from "react-icons/fa";
 import { Seo } from "../components/SEO/Seo";
 
 interface AboutItem {
@@ -54,6 +57,27 @@ const aboutItems: AboutItem[] = [
   },
 ];
 
+
+const storeProducts = [
+  {
+    image: "/images/thedigitalartist-camera-8053993.jpg",
+    title: "CCTV Cameras & Kits",
+    description:
+      "Indoor and outdoor cameras and complete security kits for homes and businesses.",
+  },
+  {
+    image: "/images/pexels-wifi6-router-32698507.jpg",
+    title: "Routers & WiFi Equipment",
+    description:
+      "Routers, access points and networking gear for reliable home and office WiFi.",
+  },
+  {
+    image: "/images/pexels-rafa-sants-3818665-5790645.jpg",
+    title: "Starlink Kits",
+    description:
+      "Starlink kits for fast internet wherever you are, even in remote areas.",
+  },
+];
 
 interface TeamMember {
   image: string;
@@ -143,13 +167,13 @@ const teamMembers: TeamMember[] = [
   {
     image: "/images/francis_eng.jpg",
     name: "Francis M",
-    role: "Assistant Software Developer",
+    role: "Software Developer",
     department: "Development",
   },
   {
     image: "/images/joe_soft.png",
     name: "Joe W",
-    role: "Assistant Software Developer",
+    role: "Software Developer",
     department: "Development",
   },
 
@@ -305,7 +329,7 @@ const About = () => {
     <>
       <Seo
         title="About Us | Movec - Our Story"
-        description="Movec was built to make choosing an internet provider simple and transparent, helping people compare real plans and prices without the guesswork."
+        description="Movec Connect builds reliable technology solutions for businesses — including an all-in-one platform that helps ISPs manage billing, routers and customers from one place."
         path="/about" />
 
       <section
@@ -367,6 +391,264 @@ const About = () => {
         </div>
       </section>
 
+      {/* Why We Built The ISP Platform */}
+      <section
+        id="isp-platform-story"
+        className="
+          py-20
+          bg-white
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+              Why We Built It
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Our ISP Platform started with
+              <span className="text-[#10B982]"> a problem we kept hearing</span>
+            </h2>
+            <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
+              ISP operators kept telling us the same things: reconciling
+              M-Pesa payments by hand, juggling a different dashboard for
+              every router brand on the network, and no real way to see
+              what was actually happening on their network in real time.
+              So we built Movec Connect — one platform for billing,
+              routers and monitoring, instead of five.
+            </p>
+            <p className="mt-4 leading-7 text-slate-600 dark:text-slate-400">
+              It's built by the same team handling networking, security
+              and connectivity work for our clients every day — so every
+              feature comes from a real operational headache, not a guess.
+            </p>
+            <Link
+              to="/ispplatform"
+              className="
+                mt-8
+                inline-flex
+                items-center
+                gap-3
+                cursor-pointer
+                px-7
+                py-3
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                font-medium
+                transition-colors
+                duration-200
+                w-fit">
+              Explore the ISP Platform
+              <FaArrowRight />
+            </Link>
+          </div>
+
+          <div className="relative h-80 lg:h-96 overflow-hidden rounded-sm [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              className="w-full h-full object-cover">
+              <source src="/video/141445-777657273.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </section>
+
+      {/* Technical Team: Ongoing Projects & CCTV */}
+      <section
+        id="technical-projects"
+        className="
+          py-20
+          bg-[#f5f5f5]
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <ContentHeader
+            eyebrow=""
+            title="What our technical team is"
+            span="working on"
+            description="Beyond the platform, our technical team is out in the field every day — connecting homes and businesses and keeping their premises secure." />
+
+          <div className="pt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {technicalProjects.map((project) => (
+              <div
+                key={project.title}
+                className="
+                  flex flex-col
+                  bg-white
+                  dark:bg-white/5
+                  border
+                  border-gray-200
+                  dark:border-white/10
+                  rounded-2xl
+                  overflow-hidden
+                  shadow-sm
+                  hover:shadow-lg
+                  transition-shadow
+                  duration-300">
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    loading="lazy"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <span
+                    className="
+                      absolute top-4 left-4
+                      inline-flex items-center gap-2
+                      px-3 py-1
+                      rounded-full
+                      bg-black/70
+                      text-white
+                      text-xs
+                      font-semibold
+                      uppercase
+                      tracking-wider">
+                    {project.ongoing && (
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-[#10B982] opacity-75 animate-ping" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B982]" />
+                      </span>
+                    )}
+                    {project.badge}
+                  </span>
+                </div>
+
+                <div className="flex flex-col flex-1 p-6 md:p-8">
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+                    {project.description}
+                  </p>
+                  <ul className="mt-5 space-y-2">
+                    {project.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to={project.link}
+                    className="
+                      mt-8
+                      inline-flex
+                      items-center
+                      gap-3
+                      px-6
+                      py-3
+                      bg-orange-500
+                      hover:bg-orange-600
+                      text-white
+                      font-medium
+                      transition-colors
+                      duration-200
+                      w-fit">
+                    {project.linkLabel}
+                    <FaArrowRight />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Movec Store */}
+      <section
+        id="movec-store"
+        className="
+          py-20
+          bg-white
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+              Movec Store
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Shop the equipment
+              <span className="text-[#10B982]"> we install every day</span>
+            </h2>
+            <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
+              The Movec Store is our online shop for the same networking,
+              security and connectivity equipment our technical team uses
+              in the field — so you get gear we know and trust.
+            </p>
+            <p className="mt-4 leading-7 text-slate-600 dark:text-slate-400">
+              Buy it on its own, or let our team install and set it up for
+              you. Not sure what you need? Get in touch and we'll help you
+              pick the right products.
+            </p>
+            <Link
+              to="/contact"
+              className="
+                mt-8
+                inline-flex
+                items-center
+                gap-3
+                px-7
+                py-3
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                font-medium
+                transition-colors
+                duration-200
+                w-fit">
+              Contact us to order
+              <FaArrowRight />
+            </Link>
+          </div>
+
+          <div className="grid gap-4">
+            {storeProducts.map((product) => (
+              <div
+                key={product.title}
+                className="
+                  group
+                  flex
+                  items-stretch
+                  bg-[#f5f5f5]
+                  dark:bg-white/5
+                  border
+                  border-gray-200
+                  dark:border-white/10
+                  rounded-2xl
+                  overflow-hidden
+                  hover:border-orange-500
+                  transition-colors
+                  duration-300">
+                <div className="shrink-0 w-32 sm:w-44 min-h-32 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-5 sm:p-6 self-center">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {product.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                    {product.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section
         id="team"
@@ -383,46 +665,11 @@ const About = () => {
             span="team"
             description="The people behind Movec, working every day to keep our clients connected, secure and supported." />
 
-          <div className="py-16 px-4 sm:px-6">
-
-            {
-              departmentOrder.map((department) => {
-                const members = teamMembers.filter((m) => m.department === department);
-                if (members.length === 0) return null;
-
-                return (
-                  <div key={department} className="mb-14 last:mb-0">
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-6 text-center sm:text-left">
-                      {department} Team
-                    </h3>
-                    <div
-                      className="
-                    grid
-                    grid-cols-2
-                    sm:grid-cols-3
-                    lg:grid-cols-4
-                    gap-8
-                    md:gap-10">
-                      {members.map((member, index) => (
-                        <div key={index} className="flex flex-col items-center text-center">
-                          <img
-                            src={member.image}
-                            alt={member.name}
-                            loading="lazy"
-                            className="w-28 h-28 sm:w-32 sm:h-32 border-4 border-orange-500 aspect-square object-cover rounded-full shadow-lg hover:scale-105 transition-transform duration-300" />
-                          <h3 className="mt-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
-                            {member.name}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                            {member.role}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })
-            }
+          <div className="pb-8">
+            <TeamCarousel
+              members={departmentOrder.flatMap((department) =>
+                teamMembers.filter((m) => m.department === department)
+              )} />
           </div>
         </div>
       </section >

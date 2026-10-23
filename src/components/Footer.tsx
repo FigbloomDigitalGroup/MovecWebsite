@@ -8,10 +8,26 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import NewsletterSubscribe from "./widgets/NewsletterSubscribe";
 
 const Footer = () => {
   return (
     <footer role="contentinfo" className="bg-gray-200 dark:bg-gray-950 text-gray-300">
+
+      {/* Newsletter CTA */}
+      <div className="bg-[#0b1120]">
+        <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="text-center lg:text-left">
+            <h3 className="text-white text-lg font-semibold">
+              Stay in the loop
+            </h3>
+            <p className="text-slate-400 text-sm mt-1">
+              Subscribe to hear about news and events happening at Movec.
+            </p>
+          </div>
+          <NewsletterSubscribe variant="dark" />
+        </div>
+      </div>
 
       {/* Top Footer */}
       <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-4 md:grid-cols-2 gap-12">

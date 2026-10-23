@@ -60,6 +60,8 @@ const Navbar: React.FC<NavbarProps> = ({ openNav }) => {
     { name: "Explore", link: "/" },
     { name: "About Us", link: "/about" },
     { name: "ISP Platform", link: "/ispplatform" },
+    { name: "News", link: "/news" },
+    { name: "Projects", link: "/projects" },
     { name: "Get In touch", link: "/contact" },
   ];
 

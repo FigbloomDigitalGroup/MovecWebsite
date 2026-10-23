@@ -1,25 +1,27 @@
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import StreamingCard from "../StreamingContent/StreamingCard";
+import HeroBackgroundSlideshow from "./HeroBackgroundSlideshow";
+import IspPlatformCard from "./IspPlatformCard";
+import MovecStoreCard from "./MovecStoreCard";
 
 const Hero = () => {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 h-full w-full object-cover">
-        <source src="/video/141445-777657273.mp4" type="video/mp4" />
-      </video>
+      className="relative min-h-screen py-32 lg:py-0 flex items-center justify-center overflow-hidden">
+      <HeroBackgroundSlideshow />
       <div className="absolute inset-0 bg-black/60 dark:bg-black/80" />
 
-      <div className="relative z-10 w-full px-6 flex justify-start">
-        <div className="max-w-5xl text-start mx-auto px-8">
+      <div
+        className="
+          relative z-10 w-full px-6
+          flex flex-col lg:flex-row
+          items-center lg:items-end
+          justify-between
+          gap-12
+          max-w-7xl mx-auto">
+        <div className="max-w-5xl text-start lg:px-8">
           <h1 className="mt-4 text-4xl md:text-6xl lg:text-6xl font-bold leading-tight text-white">
             {/* RED: Grow your ISP business */}
             <StreamingCard delay={150} direction="left" duration={900} className="inline">
@@ -87,6 +89,15 @@ const Hero = () => {
                 Explore Platform
               </Link>
             </div>
+          </StreamingCard>
+        </div>
+
+        <div className="w-full sm:w-auto flex flex-col items-center lg:items-end gap-4">
+          <StreamingCard delay={700} direction="right" duration={900} className="w-full sm:w-auto">
+            <MovecStoreCard />
+          </StreamingCard>
+          <StreamingCard delay={850} direction="right" duration={900} className="w-full sm:w-auto">
+            <IspPlatformCard />
           </StreamingCard>
         </div>
       </div>
