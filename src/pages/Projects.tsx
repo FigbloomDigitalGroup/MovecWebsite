@@ -4,12 +4,24 @@ import ProjectCard from "../components/cards/ProjectCard";
 import { Seo } from "../components/SEO/Seo";
 import { technicalProjects } from "../dummydata/TechnicalProjects";
 
+// Our own product, listed first, ahead of the technical team's field projects.
+const projects = [
+  {
+    image: "/images/charlvera-computer-8589000.png",
+    tag: "ISP Platform",
+    title: "Movec Connect: ISP Management Platform",
+    description:
+      "Our all-in-one platform for ISPs, with automated billing and M-Pesa reconciliation, router management across brands and real-time network monitoring. Built from the problems ISP operators kept telling us about.",
+  },
+  ...technicalProjects,
+];
+
 const Projects = () => {
   return (
     <>
       <Seo
         title="Projects | Movec - Our Work"
-        description="Projects our technical team is working on — WiFi and internet installations for homes and businesses, and CCTV security systems."
+        description="What Movec is working on: the Movec Connect ISP platform, WiFi and internet installations for homes and businesses, and CCTV security systems."
         path="/projects"
       />
 
@@ -52,12 +64,12 @@ const Projects = () => {
             eyebrow=""
             title="Recent"
             span="work"
-            description="From WiFi and internet rollouts to CCTV installations, here's what our technical team is working on."
+            description="From our own ISP platform to WiFi, internet and CCTV installations in the field, here's what we're working on."
             align="center"
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-10 max-w-4xl mx-auto">
-            {technicalProjects.map((project) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+            {projects.map((project) => (
               <ProjectCard key={project.title} project={project} />
             ))}
           </div>
