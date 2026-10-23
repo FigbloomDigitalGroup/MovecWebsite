@@ -45,7 +45,7 @@ const serviceLinks = [
   {
     name: "IT Support & Networking",
     icon: FaNetworkWired,
-    link: "/itSupport",
+    link: "/itsupport",
   },
 ];
 
@@ -70,6 +70,8 @@ const MobileNav: React.FC<Props> = ({ showNav, closeNav }) => {
     { name: "Explore", link: "/" },
     { name: "About Us", link: "/about" },
     { name: "ISP Platform", link: "/ispplatform" },
+    { name: "News", link: "/news" },
+    { name: "Projects", link: "/projects" },
     { name: "Get In touch", link: "/contact" },
   ];
 
