@@ -25,16 +25,16 @@ const MovecStoreCard = () => {
         alt=""
         loading="eager"
         className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-white from-40% via-white/80 to-transparent" />
 
       <div className="relative z-10 h-full flex flex-col justify-center p-6">
         <span className="text-orange-500 font-semibold uppercase tracking-wider text-xs">
           Movec Store
         </span>
-        <h3 className="mt-2 text-white font-bold text-lg leading-snug">
+        <h3 className="mt-2 text-slate-900 font-bold text-lg leading-snug">
           CCTV, routers & Starlink kits
         </h3>
-        <p className="mt-1 text-sm text-gray-300 leading-relaxed">
+        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
           The same equipment our team installs every day.
         </p>
         <Link
@@ -44,10 +44,13 @@ const MovecStoreCard = () => {
             inline-flex
             items-center
             gap-2
+            px-4
+            py-2
             text-sm
             font-semibold
             text-white
-            hover:text-orange-500
+            bg-orange-500
+            hover:bg-orange-600
             transition-colors
             duration-200
             w-fit">
