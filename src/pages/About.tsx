@@ -14,8 +14,7 @@ import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
-import StreamingCard from "../components/StreamingContent/StreamingCard";
-import HeroBackgroundSlideshow from "../components/hero/HeroBackgroundSlideshow";
+import TeamCarousel from "../components/cards/TeamCarousel";
 import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
@@ -57,15 +56,6 @@ const aboutItems: AboutItem[] = [
   },
 ];
 
-
-const ABOUT_HERO_SLIDES = [
-  "/images/pexels-margo-evardson-2158292018-37166577.jpg",
-  "/images/u_grs7xmagi8-ai-generated-9449768.jpg",
-  "/images/geralt-binary-3725329.jpg",
-  "/images/pexels-rafa-sants-3818665-5790645.jpg",
-  "/images/innovalabs-software-development-6523979.jpg",
-  "/images/webtechexperts-cctv-surveillance-camera-7267551_1920.jpg",
-];
 
 interface TeamMember {
   image: string;
@@ -324,10 +314,14 @@ const About = () => {
         className="
           relative
           py-32
-          overflow-hidden
+          bg-cover
+          bg-center
+          bg-fixed
           flex
-          items-center">
-        <HeroBackgroundSlideshow slides={ABOUT_HERO_SLIDES} />
+          items-center"
+        style={{
+          backgroundImage: "url('images/graphixmade-ai-generated-8990043.png ')",
+        }}>
         <div className="absolute inset-0 bg-black/70" />
 
         {/* Hero Content */}
@@ -455,69 +449,11 @@ const About = () => {
             span="team"
             description="The people behind Movec, working every day to keep our clients connected, secure and supported." />
 
-          <div className="py-16 px-4 sm:px-6">
-
-            {
-              departmentOrder.map((department) => {
-                const members = teamMembers.filter((m) => m.department === department);
-                if (members.length === 0) return null;
-
-                return (
-                  <div key={department} className="mb-14 last:mb-0">
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-6 text-center sm:text-left">
-                      {department} Team
-                    </h3>
-                    <div
-                      className="
-                    grid
-                    grid-cols-2
-                    sm:grid-cols-3
-                    lg:grid-cols-4
-                    gap-8
-                    md:gap-10">
-                      {members.map((member, index) => (
-                        <StreamingCard
-                          key={index}
-                          direction="left"
-                          delay={index * 150}
-                          className="h-full">
-                          <div
-                            className="
-                              h-full
-                              flex flex-col
-                              items-center
-                              text-center
-                              bg-[#f5f5f5]
-                              dark:bg-white/5
-                              border
-                              border-gray-200
-                              dark:border-white/10
-                              rounded-2xl
-                              p-5
-                              shadow-sm
-                              hover:shadow-lg
-                              hover:-translate-y-1
-                              transition-all
-                              duration-300">
-                            <img
-                              src={member.image}
-                              alt={member.name}
-                              loading="lazy"
-                              className="w-24 h-24 sm:w-28 sm:h-28 border-4 border-orange-500 aspect-square object-cover rounded-full shadow-lg" />
-                            <h3 className="mt-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
-                              {member.name}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                              {member.role}
-                            </p>
-                          </div>
-                        </StreamingCard>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })
-            }
+          <div className="pb-8">
+            <TeamCarousel
+              members={departmentOrder.flatMap((department) =>
+                teamMembers.filter((m) => m.department === department)
+              )} />
           </div>
         </div>
       </section >
