@@ -7,7 +7,7 @@ import { technicalProjects } from "../dummydata/TechnicalProjects";
 // Our own product, listed first, ahead of the technical team's field projects.
 const projects = [
   {
-    image: "/images/charlvera-computer-8589000.png",
+    video: "/video/141445-777657273.mp4",
     tag: "ISP Platform",
     title: "Movec Connect: ISP Management Platform",
     description:
