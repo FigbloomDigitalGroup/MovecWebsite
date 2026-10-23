@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
 const SLIDES = [
-  "/images/geralt-cloud-3843352_1920.jpg",
-  "/images/thedigitalartist-internet-1676139_1920.jpg",
-  "/images/geralt-blue-light-1675686_1920.jpg",
-  "/images/clarkdonald413-linux-4259595.jpg",
+  "/images/pexels-margo-evardson-2158292018-37166577.jpg",
+  "/images/u_grs7xmagi8-ai-generated-9449768.jpg",
+  "/images/geralt-binary-3725329.jpg",
+  "/images/pexels-rafa-sants-3818665-5790645.jpg",
+  "/images/innovalabs-software-development-6523979.jpg",
+  "/images/webtechexperts-cctv-surveillance-camera-7267551_1920.jpg",
 ];
 
 const SLIDE_DURATION = 5000;

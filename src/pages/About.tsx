@@ -14,6 +14,7 @@ import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import AboutCard from "../components/cards/AboutCard";
+import StreamingCard from "../components/StreamingContent/StreamingCard";
 import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
@@ -469,19 +470,42 @@ const About = () => {
                     gap-8
                     md:gap-10">
                       {members.map((member, index) => (
-                        <div key={index} className="flex flex-col items-center text-center">
-                          <img
-                            src={member.image}
-                            alt={member.name}
-                            loading="lazy"
-                            className="w-28 h-28 sm:w-32 sm:h-32 border-4 border-orange-500 aspect-square object-cover rounded-full shadow-lg hover:scale-105 transition-transform duration-300" />
-                          <h3 className="mt-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
-                            {member.name}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                            {member.role}
-                          </p>
-                        </div>
+                        <StreamingCard
+                          key={index}
+                          direction="left"
+                          delay={index * 150}
+                          className="h-full">
+                          <div
+                            className="
+                              h-full
+                              flex flex-col
+                              items-center
+                              text-center
+                              bg-[#f5f5f5]
+                              dark:bg-white/5
+                              border
+                              border-gray-200
+                              dark:border-white/10
+                              rounded-2xl
+                              p-5
+                              shadow-sm
+                              hover:shadow-lg
+                              hover:-translate-y-1
+                              transition-all
+                              duration-300">
+                            <img
+                              src={member.image}
+                              alt={member.name}
+                              loading="lazy"
+                              className="w-24 h-24 sm:w-28 sm:h-28 border-4 border-orange-500 aspect-square object-cover rounded-full shadow-lg" />
+                            <h3 className="mt-4 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
+                              {member.name}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                              {member.role}
+                            </p>
+                          </div>
+                        </StreamingCard>
                       ))}
                     </div>
                   </div>
