@@ -145,13 +145,13 @@ const teamMembers: TeamMember[] = [
   {
     image: "/images/francis_eng.jpg",
     name: "Francis M",
-    role: "Assistant Software Developer",
+    role: "Software Developer",
     department: "Development",
   },
   {
     image: "/images/joe_soft.png",
     name: "Joe W",
-    role: "Assistant Software Developer",
+    role: "Software Developer",
     department: "Development",
   },
 
