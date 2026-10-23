@@ -1,4 +1,3 @@
-import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 /**
@@ -55,7 +54,6 @@ const MovecStoreCard = () => {
             duration-200
             w-fit">
           Contact us to order
-          <FaArrowRight className="text-xs" />
         </Link>
       </div>
     </div>
