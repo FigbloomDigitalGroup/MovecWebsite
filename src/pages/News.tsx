@@ -1,6 +1,7 @@
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import NewsletterSubscribe from "../components/widgets/NewsletterSubscribe";
+import SubscribeBenefits from "../components/widgets/SubscribeBenefits";
 import { Seo } from "../components/SEO/Seo";
 
 // Featured news post. The image is a full poster, so it's shown uncropped.
@@ -113,15 +114,17 @@ const News = () => {
 
       {/* Subscribe CTA */}
       <section className="py-20 bg-[#0b1120]">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white">
             Don't miss what's next
           </h2>
           <p className="mt-3 text-slate-400">
-            Subscribe to get notified whenever there's news or an event
-            happening at Movec.
+            Here's what you'll get when you subscribe:
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8">
+            <SubscribeBenefits />
+          </div>
+          <div className="mt-10 flex justify-center">
             <NewsletterSubscribe variant="dark" />
           </div>
         </div>
