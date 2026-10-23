@@ -19,9 +19,7 @@ import { GoGoal } from "react-icons/go";
 import { VscCopilotSuccess } from "react-icons/vsc";
 import { GiCrystalGrowth } from "react-icons/gi";
 import { LiaAlignRightSolid } from "react-icons/lia";
-import { FaStar, FaArrowRight, FaStore } from "react-icons/fa";
-import { BiCctv } from "react-icons/bi";
-import { MdRouter, MdSatelliteAlt } from "react-icons/md";
+import { FaStar, FaArrowRight } from "react-icons/fa";
 import { Seo } from "../components/SEO/Seo";
 
 interface AboutItem {
@@ -98,19 +96,19 @@ const technicalProjects = [
 
 const storeProducts = [
   {
-    icon: <BiCctv />,
+    image: "/images/thedigitalartist-camera-8053993.jpg",
     title: "CCTV Cameras & Kits",
     description:
       "Indoor and outdoor cameras and complete security kits for homes and businesses.",
   },
   {
-    icon: <MdRouter />,
+    image: "/images/pexels-wifi6-router-32698507.jpg",
     title: "Routers & WiFi Equipment",
     description:
       "Routers, access points and networking gear for reliable home and office WiFi.",
   },
   {
-    icon: <MdSatelliteAlt />,
+    image: "/images/pexels-rafa-sants-3818665-5790645.jpg",
     title: "Starlink Kits",
     description:
       "Starlink kits for fast internet wherever you are, even in remote areas.",
@@ -606,8 +604,7 @@ const About = () => {
           duration-300">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 text-orange-500 font-semibold uppercase tracking-wider text-sm">
-              <FaStore />
+            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
               Movec Store
             </span>
             <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
@@ -650,23 +647,27 @@ const About = () => {
               <div
                 key={product.title}
                 className="
+                  group
                   flex
-                  items-start
-                  gap-5
-                  p-6
+                  items-stretch
                   bg-[#f5f5f5]
                   dark:bg-white/5
                   border
                   border-gray-200
                   dark:border-white/10
                   rounded-2xl
+                  overflow-hidden
                   hover:border-orange-500
                   transition-colors
                   duration-300">
-                <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-orange-500/10 text-orange-500 text-3xl">
-                  {product.icon}
+                <div className="shrink-0 w-32 sm:w-44 min-h-32 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div>
+                <div className="p-5 sm:p-6 self-center">
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                     {product.title}
                   </h3>
