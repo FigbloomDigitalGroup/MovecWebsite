@@ -87,6 +87,9 @@ const loadSubscribers = async (): Promise<Subscriber[]> => {
 const Admin = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  // Why the admin check failed: "missing" (no admins/{uid} doc) or
+  // "denied" (the Firestore rules didn't allow reading it).
+  const [denyReason, setDenyReason] = useState<"missing" | "denied">("missing");
   const [authReady, setAuthReady] = useState(false);
 
   useEffect(() => {
@@ -97,8 +100,11 @@ const Admin = () => {
       if (u) {
         try {
           const adminDoc = await getDoc(doc(db, "admins", u.uid));
+          setDenyReason("missing");
           setIsAdmin(adminDoc.exists());
-        } catch {
+        } catch (err) {
+          console.error("Admin check failed:", err);
+          setDenyReason("denied");
           setIsAdmin(false);
         }
       }
@@ -120,7 +126,7 @@ const Admin = () => {
           ) : isAdmin === null ? (
             <p className="text-center text-slate-500">Checking access…</p>
           ) : !isAdmin ? (
-            <NotAuthorized user={user} />
+            <NotAuthorized user={user} reason={denyReason} />
           ) : (
             <Dashboard user={user} />
           )}
@@ -179,12 +185,49 @@ const LoginForm = () => {
   );
 };
 
-const NotAuthorized = ({ user }: { user: User }) => (
-  <div className="max-w-md mx-auto text-center bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8">
+interface NotAuthorizedProps {
+  user: User;
+  reason: "missing" | "denied";
+}
+
+// Shows the exact UID and what to fix, so setting up an admin is easy.
+const NotAuthorized = ({ user, reason }: NotAuthorizedProps) => (
+  <div className="max-w-xl mx-auto bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8">
     <h1 className="text-2xl font-bold text-slate-900 dark:text-white">No admin access</h1>
     <p className="mt-3 text-slate-600 dark:text-slate-400">
-      {user.email} is signed in but isn't an admin.
+      {user.email} is signed in but isn't an admin yet.
     </p>
+
+    <p className="mt-5 text-sm font-semibold text-slate-700 dark:text-slate-300">Your User UID</p>
+    <code className="mt-1 block break-all select-all rounded-lg bg-slate-100 dark:bg-white/10 px-3 py-2 text-sm text-slate-900 dark:text-white">
+      {user.uid}
+    </code>
+
+    <div className="mt-5 text-sm leading-6 text-slate-600 dark:text-slate-400">
+      {reason === "missing" ? (
+        <>
+          <p className="font-semibold text-slate-800 dark:text-slate-200">
+            No admin entry was found for this UID.
+          </p>
+          <p className="mt-1">
+            In Firebase → Firestore Database → Data, there must be a collection named
+            exactly <strong>admins</strong> containing a document whose ID is exactly the UID
+            above (not Auto-ID, not the email).
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="font-semibold text-slate-800 dark:text-slate-200">
+            Firebase blocked the admin check.
+          </p>
+          <p className="mt-1">
+            Publish the latest <strong>firestore.rules</strong> in Firebase → Firestore Database →
+            Rules, then sign out and back in.
+          </p>
+        </>
+      )}
+    </div>
+
     <button
       onClick={() => signOut(auth)}
       className="mt-6 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg">
