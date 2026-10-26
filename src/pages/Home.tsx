@@ -62,7 +62,55 @@ const Home = () => {
         </Link>
       </AlternatingSection>
 
-      {/* Get In Touch — image left, content right */}
+      {/* Projects — image left, content right */}
+      <AlternatingSection
+        id="projects"
+        eyebrow="Our Projects"
+        title="What we're"
+        span="working on"
+        description="Our Movec Connect ISP platform, ongoing WiFi and internet installations for homes and businesses, and CCTV systems that keep premises secure."
+        image="/images/pexels-margo-evardson-2158292018-37166577.jpg"
+        reverse={true}>
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-200">
+          View Our Projects
+        </Link>
+      </AlternatingSection>
+
+      {/* Movec Store — content left, image right */}
+      <AlternatingSection
+        id="store"
+        eyebrow="Movec Store"
+        title="Shop the equipment"
+        span="we install every day"
+        description="CCTV cameras and kits, routers and WiFi equipment, and Starlink kits. Buy them on their own, or let our team install them for you."
+        image="/images/pexels-wifi6-router-32698507.jpg"
+        reverse={false}>
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-200">
+          Contact Us to Order
+        </Link>
+      </AlternatingSection>
+
+      {/* News — image left, content right */}
+      <AlternatingSection
+        id="news"
+        eyebrow="Latest News"
+        title="What's happening"
+        span="at Movec"
+        description="Figbloom Vision Smart Security Systems: AI-powered recognition, the Figillance emergency response app and smart threat detection that turn security cameras into smarter surveillance."
+        image="/images/figbloom-vision-smart-security-booth.jpg"
+        reverse={true}>
+        <Link
+          to="/news"
+          className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-200">
+          Read the News
+        </Link>
+      </AlternatingSection>
+
+      {/* Get In Touch — content left, image right */}
       <AlternatingSection
         id="contact"
         eyebrow="Get In Touch"
@@ -70,7 +118,7 @@ const Home = () => {
         span="From You"
         description="Whether you need software development, ISP management, networking, Starlink, CCTV or GPS fleet tracking  we're ready to help. Reach out and our team will respond within a day."
         image="/images/graphixmade-ai-generated-8990043.png"
-        reverse={true}>
+        reverse={false}>
         <Link
           to="/contact"
           className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all duration-200">
