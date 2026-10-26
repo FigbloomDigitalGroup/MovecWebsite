@@ -22,14 +22,14 @@ Do the steps below once, in order.
 
 1. [Firebase Console](https://console.firebase.google.com) → project **reviews-c5d57** → **Build → Authentication** → **Get started**.
 2. **Sign-in method** → **Email/Password** → **Enable** → **Save**.
-3. **Users** → **Add user** → `francis@figbloom.org` + a strong password (your `/admin` password).
+3. **Users** → **Add user** → `movecconnect@gmail.com` + a strong password (your `/admin` password).
 4. Copy the new user's **User UID**.
 
 ### A2. Mark yourself as an admin
 
 1. **Build → Firestore Database → Data** → **+ Start collection** → Collection ID `admins`.
 2. **Document ID:** paste the **User UID** (don't use Auto-ID).
-3. Field `email` (string) = `francis@figbloom.org` → **Save**.
+3. Field `email` (string) = `movecconnect@gmail.com` → **Save**.
 
 ### A3. Publish the security rules
 
