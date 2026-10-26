@@ -51,6 +51,8 @@ service cloud.firestore {
     }
 
     // Posts (News page + emails): everyone can read, only admins can write.
+    // Subscriber emails are sent by the Google Apps Script (apps-script/Code.gs),
+    // which reads `subscribers` with the admin's sign-in, so these rules apply.
     match /posts/{postId} {
       allow read: if true;
       allow create: if isAdmin()
@@ -65,13 +67,6 @@ service cloud.firestore {
                     && request.resource.data.image is string
                     && request.resource.data.createdAt == request.time;
       allow update, delete: if isAdmin();
-    }
-
-    // Outgoing emails, sent by the "Trigger Email from Firestore" extension
-    // (which bypasses these rules). Only admins can queue or view them.
-    match /mail/{mailId} {
-      allow create, read: if isAdmin();
-      allow update, delete: if false;
     }
   }
 }

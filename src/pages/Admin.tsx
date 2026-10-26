@@ -19,7 +19,6 @@ import {
   query,
   serverTimestamp,
   updateDoc,
-  writeBatch,
 } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
 
@@ -30,12 +29,15 @@ import {
   formatPostDate,
 } from "../dummydata/Posts";
 import type { Post, PostCategory } from "../dummydata/Posts";
-import { buildPostEmail } from "../lib/postEmail";
+import { emailSendingConfigured, sendPostEmails } from "../lib/sendPostEmails";
+import type { SendResult } from "../lib/sendPostEmails";
 
-// Resend's free plan sends at most 100 emails a day.
-const DAILY_EMAIL_LIMIT = 100;
-// Firestore allows at most 500 writes in one batch.
-const BATCH_SIZE = 450;
+const describeResult = (r: SendResult) => {
+  const failed = r.failed > 0 ? ` (${r.failed} couldn't be delivered)` : "";
+  return r.remaining > 0
+    ? `Sent ${r.sent} emails${failed}. ${r.remaining} still to send: the Gmail daily limit was reached, so use "Send to remaining" in the list below later or tomorrow.`
+    : `Sent ${r.sent} emails${failed}. All subscribers have it.`;
+};
 
 interface Subscriber {
   id: string;
@@ -75,8 +77,8 @@ const loadSubscribers = async (): Promise<Subscriber[]> => {
  * Private page (not linked from the menu) for publishing news, events,
  * holidays, adverts and announcements. Each post is saved to Firestore
  * `posts` (shown on the News page) and, optionally, emailed to every
- * subscriber by writing one document per subscriber to `mail`, which the
- * Firebase "Trigger Email" extension sends through Resend.
+ * subscriber through Gmail by the Google Apps Script in apps-script/Code.gs
+ * (see lib/sendPostEmails.ts).
  *
  * Only signed-in users with a document in `admins/{uid}` can use it; the
  * Firestore rules (firestore.rules) enforce the same check.
@@ -194,6 +196,29 @@ const NotAuthorized = ({ user }: { user: User }) => (
 const Dashboard = ({ user }: { user: User }) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [subscriberCount, setSubscriberCount] = useState<number | null>(null);
+  const [sendingId, setSendingId] = useState<string | null>(null);
+  const [listMessage, setListMessage] = useState("");
+
+  // Emails a post that was published without email, or continues one that
+  // stopped at the Gmail daily limit.
+  const emailPost = async (post: Post) => {
+    if (!window.confirm(`Email "${post.title}" to the subscribers who haven't received it yet?`)) return;
+    setSendingId(post.id);
+    setListMessage("");
+    try {
+      const r = await sendPostEmails(user, post);
+      await updateDoc(doc(db, "posts", post.id), {
+        emailed: true,
+        recipients: r.total - r.remaining,
+        emailRemaining: r.remaining,
+      });
+      setListMessage(`"${post.title}": ${describeResult(r)}`);
+    } catch (err) {
+      setListMessage(`"${post.title}": ${err instanceof Error ? err.message : "Sending failed."}`);
+    } finally {
+      setSendingId(null);
+    }
+  };
 
   useEffect(() => {
     loadSubscribers()
@@ -223,10 +248,11 @@ const Dashboard = ({ user }: { user: User }) => {
         </button>
       </div>
 
-      <NewPostForm subscriberCount={subscriberCount} />
+      <NewPostForm user={user} subscriberCount={subscriberCount} />
 
       <div>
         <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Published posts</h2>
+        {listMessage && <p className="mb-4 text-sm text-[#10B982] font-medium">{listMessage}</p>}
         {posts.length === 0 ? (
           <p className="text-slate-500">Nothing published yet.</p>
         ) : (
@@ -241,8 +267,17 @@ const Dashboard = ({ user }: { user: User }) => {
                   <p className="text-xs text-slate-500">
                     {post.category} · {formatPostDate(post.createdAt)} ·{" "}
                     {post.emailed ? `emailed to ${post.recipients}` : "not emailed"}
+                    {post.emailRemaining ? ` · ${post.emailRemaining} still to send` : ""}
                   </p>
                 </div>
+                {emailSendingConfigured && (!post.emailed || (post.emailRemaining ?? 0) > 0) && (
+                  <button
+                    onClick={() => emailPost(post)}
+                    disabled={sendingId !== null}
+                    className="text-sm text-[#10B982] font-semibold shrink-0 disabled:opacity-50">
+                    {sendingId === post.id ? "Sending…" : post.emailed ? "Send to remaining" : "Email it"}
+                  </button>
+                )}
                 <Link to={`/news/${post.id}`} className="text-sm text-orange-500 font-semibold shrink-0">
                   View
                 </Link>
@@ -264,12 +299,17 @@ const Dashboard = ({ user }: { user: User }) => {
   );
 };
 
-const NewPostForm = ({ subscriberCount }: { subscriberCount: number | null }) => {
+interface NewPostFormProps {
+  user: User;
+  subscriberCount: number | null;
+}
+
+const NewPostForm = ({ user, subscriberCount }: NewPostFormProps) => {
   const [category, setCategory] = useState<PostCategory>("News");
   const [image, setImage] = useState(POST_IMAGES.News[0]);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [sendEmail, setSendEmail] = useState(true);
+  const [sendEmail, setSendEmail] = useState(emailSendingConfigured);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -310,30 +350,20 @@ const NewPostForm = ({ subscriberCount }: { subscriberCount: number | null }) =>
       });
 
       if (sendEmail) {
-        setStatus("Preparing emails…");
-        const subscribers = await loadSubscribers();
-        for (let i = 0; i < subscribers.length; i += BATCH_SIZE) {
-          const batch = writeBatch(db);
-          for (const sub of subscribers.slice(i, i + BATCH_SIZE)) {
-            batch.set(doc(collection(db, "mail")), {
-              to: sub.email.trim(),
-              message: buildPostEmail({
-                postId: postRef.id,
-                subscriberId: sub.id,
-                title: trimmedTitle,
-                category,
-                body: trimmedBody,
-                image,
-              }),
-              postId: postRef.id,
-              createdAt: serverTimestamp(),
-            });
-          }
-          setStatus(`Queuing emails… ${Math.min(i + BATCH_SIZE, subscribers.length)}/${subscribers.length}`);
-          await batch.commit();
-        }
-        await updateDoc(postRef, { emailed: true, recipients: subscribers.length });
-        setStatus(`Published and queued ${subscribers.length} emails.`);
+        setStatus("Published. Sending emails… (this can take a few minutes, keep this page open)");
+        const r = await sendPostEmails(user, {
+          id: postRef.id,
+          title: trimmedTitle,
+          category,
+          body: trimmedBody,
+          image,
+        });
+        await updateDoc(postRef, {
+          emailed: true,
+          recipients: r.total - r.remaining,
+          emailRemaining: r.remaining,
+        });
+        setStatus(describeResult(r));
       } else {
         setStatus("Published on the website.");
       }
@@ -342,7 +372,11 @@ const NewPostForm = ({ subscriberCount }: { subscriberCount: number | null }) =>
       setBody("");
     } catch (err) {
       console.error("Publishing failed:", err);
-      setError("Something went wrong. Check your connection and try again.");
+      setError(
+        err instanceof Error && err.message
+          ? `${err.message} If the post was published, you can email it from the list below.`
+          : "Something went wrong. Check your connection and try again."
+      );
       setStatus("");
     } finally {
       setBusy(false);
@@ -423,15 +457,15 @@ const NewPostForm = ({ subscriberCount }: { subscriberCount: number | null }) =>
         <input
           type="checkbox"
           checked={sendEmail}
+          disabled={!emailSendingConfigured}
           onChange={(e) => setSendEmail(e.target.checked)}
           className="mt-1 h-4 w-4 accent-orange-500" />
         <span>
           Email this to all subscribers
           {subscriberCount !== null && ` (${subscriberCount})`}
-          {sendEmail && subscriberCount !== null && subscriberCount > DAILY_EMAIL_LIMIT && (
-            <span className="block mt-1 text-red-500">
-              The free email plan sends at most {DAILY_EMAIL_LIMIT} emails a day, so some
-              subscribers may not get this one.
+          {!emailSendingConfigured && (
+            <span className="block mt-1 text-slate-500">
+              Email sending isn't set up yet (APPS_SCRIPT_URL in src/config/site.ts).
             </span>
           )}
         </span>

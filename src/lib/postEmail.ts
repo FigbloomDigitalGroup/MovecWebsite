@@ -1,6 +1,10 @@
 import { EMAIL_LOGO_PATH, SENDER_NAME, SITE_URL } from "../config/site";
 import type { PostCategory } from "../dummydata/Posts";
 
+// Stands in for the subscriber's id in the unsubscribe link. The Apps Script
+// (apps-script/Code.gs) swaps it for each subscriber's real id when sending.
+export const SUBSCRIBER_PLACEHOLDER = "SUBSCRIBERIDPLACEHOLDER";
+
 interface PostEmailInput {
   postId: string;
   subscriberId: string;

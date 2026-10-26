@@ -57,6 +57,8 @@ export interface Post {
   createdAt: PostTimestamp | null;
   emailed: boolean;
   recipients: number;
+  // Subscribers not emailed yet because the Gmail daily limit was reached.
+  emailRemaining?: number;
 }
 
 export const formatPostDate = (createdAt: PostTimestamp | null) =>

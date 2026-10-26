@@ -2,83 +2,97 @@
 
 The admin page at **`/admin`** lets you publish News, Events, Holidays, Adverts
 and Announcements. Each post appears on the News page and can be emailed to all
-newsletter subscribers from **Movec Systems**.
+newsletter subscribers from **Movec Systems** through Gmail.
 
-The code is done. The steps below are one-time setup in the **Firebase Console**
-(project `reviews-c5d57`) and **Resend**. Do them in order.
+Everything is free: Firebase stays on the free **Spark** plan, and emails are
+sent by a small **Google Apps Script** that runs in a Google account. No card,
+no server.
 
-## 1. Switch the Firebase project to the Blaze plan
+```
+/admin ──"Publish & email"──▶ Firestore `posts` ──▶ News page
+   │
+   └──▶ Google Apps Script ──reads `subscribers`──▶ Gmail ──▶ subscribers' inboxes
+```
 
-Firebase extensions need it. At Movec's size it is normally $0 (Blaze includes
-the free allowance), but it needs a payment card.
+Do the steps below once, in order.
 
-1. Firebase Console → ⚙ **Usage and billing** → **Details & settings** → **Modify plan** → **Blaze**.
-2. Set a **budget alert** (e.g. $5) so you're warned if anything ever costs money.
+## Part A: Firebase (project `reviews-c5d57`)
 
-## 2. Create your admin login
+### A1. Turn on login and create your admin account
 
-1. **Build → Authentication → Get started** → **Sign-in method** → enable **Email/Password**.
-2. **Users** tab → **Add user** → `francis@figbloom.org` and a strong password.
-3. Copy the new user's **User UID** (long code in the users list).
+1. [Firebase Console](https://console.firebase.google.com) → project **reviews-c5d57** → **Build → Authentication** → **Get started**.
+2. **Sign-in method** → **Email/Password** → **Enable** → **Save**.
+3. **Users** → **Add user** → `francis@figbloom.org` + a strong password (your `/admin` password).
+4. Copy the new user's **User UID**.
 
-## 3. Mark that user as an admin
+### A2. Mark yourself as an admin
 
-1. **Build → Firestore Database → Data** → **Start collection** → Collection ID: `admins`.
-2. **Document ID:** paste the **User UID** from step 2.3.
-3. Add one field: `email` (string) = `francis@figbloom.org` → **Save**.
+1. **Build → Firestore Database → Data** → **+ Start collection** → Collection ID `admins`.
+2. **Document ID:** paste the **User UID** (don't use Auto-ID).
+3. Field `email` (string) = `francis@figbloom.org` → **Save**.
 
-To add another admin later, repeat steps 2–3 with their email.
+### A3. Publish the security rules
 
-## 4. Publish the security rules
+**Firestore Database → Rules** → delete everything → paste the whole of
+[`firestore.rules`](../firestore.rules) → **Publish**. This protects the
+subscriber list, posts and reviews. Publishing replaces all existing rules,
+so always use the whole file.
 
-1. **Firestore Database → Rules**.
-2. Replace everything with the contents of [`firestore.rules`](../firestore.rules) → **Publish**.
+## Part B: Google Apps Script (sends the emails)
 
-This also protects the subscriber list and reviews. Publishing replaces all
-existing rules, so use the whole file.
+Use the Google account the emails should come **from**. Subscribers see this
+address; the sender name shows as **Movec Systems**. Limits: about **100
+recipients a day** on a free Gmail account, about **1,500** on Google Workspace.
 
-## 5. Verify your domain in Resend
+### B1. Create the script
 
-Resend → **Domains → Add Domain** → add the DNS records it shows where the
-domain is managed → wait until it says **Verified**. Emails can't be sent to
-subscribers until this is done.
+1. Signed in to that Google account, open **[script.google.com](https://script.google.com)** → **New project**.
+2. Rename it (top left) to `Movec subscriber emails`.
+3. Delete the sample code in `Code.gs` and paste **the whole of** [`apps-script/Code.gs`](../apps-script/Code.gs).
+4. Click **Save** (💾).
 
-## 6. Install the "Trigger Email from Firestore" extension
+### B2. Give it permission
 
-Firebase Console → **Build → Extensions** → find **Trigger Email from Firestore**
-(by Firebase) → **Install**. When asked:
+1. In the toolbar, choose the function **`authorize`** in the dropdown → **Run**.
+2. **Review permissions** → choose the account → if Google shows "Google hasn't
+   verified this app": **Advanced** → **Go to Movec subscriber emails (unsafe)**.
+   This is your own script, so it's safe. → **Allow**.
 
-| Setting | Value |
-|---|---|
-| Email documents collection | `mail` |
-| SMTP connection URI | `smtps://resend@smtp.resend.com:465` |
-| SMTP password | your **Resend API key** |
-| Default FROM address | `Movec Systems <info@YOUR-DOMAIN>` (an address on the domain verified in step 5) |
-| Default REPLY-TO address | the inbox replies should go to |
-| Everything else | leave the default |
+### B3. Deploy it as a web app
 
-The API key is stored in Firebase's secret storage, never in the website code.
+1. **Deploy** (top right) → **New deployment** → ⚙ next to "Select type" → **Web app**.
+2. Description: `v1`. **Execute as:** **Me**. **Who has access:** **Anyone**.
+3. **Deploy** → copy the **Web app URL** (`https://script.google.com/macros/s/…/exec`).
 
-## 7. Set the live website address
+"Anyone" only means the website can reach it. The script refuses to send
+unless the request carries your admin sign-in.
 
-In [`src/config/site.ts`](../src/config/site.ts), set `SITE_URL` to the live
-site's address (e.g. `https://movec.co.ke`). Emails use it for the logo and the
-"Read on the Movec website" and unsubscribe links.
+### B4. Connect it to the website
 
-## 8. Test
+Put the Web app URL in [`src/config/site.ts`](../src/config/site.ts) as
+`APPS_SCRIPT_URL`, and set `SITE_URL` there to the live website address (used
+for the logo and links in emails). Then merge and deploy the website.
 
-1. Subscribe on the website with your own email.
-2. Go to `/admin`, sign in, write a short **News** post, leave **Email this to all
-   subscribers** ticked → **Publish & email**.
-3. Check your inbox (and spam). In Firestore → `mail`, each email shows a
-   `delivery.state` of `SUCCESS` or an error message.
+> **Changing the script later:** edit it, then **Deploy → Manage deployments →
+> ✏ Edit → Version: New version → Deploy**. The URL stays the same.
 
-## Limits to know
+## Part C: Test
 
-- **Resend free plan:** 100 emails a day, 3,000 a month. With more than 100
-  subscribers, a send reaches only the first 100 that day; the admin page warns
-  you when that applies.
+1. Subscribe on the website with your own email (footer).
+2. Open `/admin`, sign in, write a short **News** post, keep **Email this to all
+   subscribers** ticked → **Publish & email**. Keep the page open until it says
+   how many were sent.
+3. Check your inbox (and spam). Click **Unsubscribe** in the email to check that works too.
+
+## Good to know
+
+- **Daily limit:** if Gmail's daily limit is reached, the admin page says how
+  many are left. Click **Send to remaining** next to the post later or the next
+  day; it continues where it stopped and never sends anyone the same post twice.
+- **Posts published without email** can be emailed later with **Email it** in the list.
 - **Images** come from the ready-made sets in
   [`src/dummydata/Posts.ts`](../src/dummydata/Posts.ts). To add choices, put the
   image in `public/images/` and add its path to the right category.
+- **Spam folder:** the first emails may land in spam. Ask early subscribers to
+  mark them "Not spam".
 - Deleting a post removes it from the website; emails already sent can't be recalled.
