@@ -1,0 +1,77 @@
+rules_version = '2';
+
+// Firestore security rules for the Movec website.
+// Not deployed automatically: paste this whole file into Firebase Console →
+// Firestore Database → Rules → Publish. Publishing replaces ALL existing rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Admins are the users with a document at admins/{their uid}. These are
+    // added by hand in the Firebase Console; nobody can add one from the site.
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Reviews (About page): anyone can read and post, nobody can edit or delete.
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'comment', 'rating', 'createdAt', 'expiresAt'])
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.comment is string
+                    && request.resource.data.comment.size() > 0
+                    && request.resource.data.comment.size() <= 2000
+                    && request.resource.data.rating is int
+                    && request.resource.data.rating >= 1
+                    && request.resource.data.rating <= 5
+                    && request.resource.data.createdAt == request.time
+                    && request.resource.data.expiresAt is timestamp;
+      allow update, delete: if isAdmin();
+    }
+
+    // Newsletter subscribers: anyone can sign up; only admins can see the list.
+    // Anyone holding a subscriber's (random) document id can set only
+    // `unsubscribed: true` on it — that's the unsubscribe link in emails.
+    match /subscribers/{docId} {
+      allow create: if request.resource.data.keys().hasOnly(['email', 'subscribedAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() < 200
+                    && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+                    && request.resource.data.subscribedAt == request.time;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['unsubscribed'])
+                    && request.resource.data.unsubscribed == true;
+      allow read, delete: if isAdmin();
+    }
+
+    // Posts (News page + emails): everyone can read, only admins can write.
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if isAdmin()
+                    && request.resource.data.keys().hasOnly(['title', 'category', 'body', 'image', 'createdAt', 'emailed', 'recipients'])
+                    && request.resource.data.title is string
+                    && request.resource.data.title.size() > 0
+                    && request.resource.data.title.size() <= 150
+                    && request.resource.data.body is string
+                    && request.resource.data.body.size() > 0
+                    && request.resource.data.body.size() <= 5000
+                    && request.resource.data.category in ['News', 'Event', 'Holiday', 'Advert', 'Announcement']
+                    && request.resource.data.image is string
+                    && request.resource.data.createdAt == request.time;
+      allow update, delete: if isAdmin();
+    }
+
+    // Outgoing emails, sent by the "Trigger Email from Firestore" extension
+    // (which bypasses these rules). Only admins can queue or view them.
+    match /mail/{mailId} {
+      allow create, read: if isAdmin();
+      allow update, delete: if false;
+    }
+  }
+}
