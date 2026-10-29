@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
+import NewsCard from "../components/cards/NewsCard";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import NewsletterSubscribe from "../components/widgets/NewsletterSubscribe";
 import { Seo } from "../components/SEO/Seo";
+import { formatPostDate, postExcerpt } from "../dummydata/Posts";
+import type { Post } from "../dummydata/Posts";
+
+interface PostsSnapshot {
+  docs: { id: string; data(): Omit<Post, "id"> }[];
+}
 
 // Featured news post. The image is a full poster, so it's shown uncropped.
 const featuredNews = {
@@ -21,6 +32,19 @@ const featuredNews = {
 };
 
 const News = () => {
+  // Posts published from the admin page (/admin), newest first.
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+    return onSnapshot(
+      q,
+      (snapshot: PostsSnapshot) =>
+        setPosts(snapshot.docs.map((d) => ({ id: d.id, ...d.data() }))),
+      (err: Error) => console.error("Error loading posts:", err)
+    );
+  }, []);
+
   return (
     <>
       <Seo
@@ -71,6 +95,23 @@ const News = () => {
             description="The latest from Movec and the Figbloom family."
             align="center"
           />
+
+          {posts.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+              {posts.map((post) => (
+                <Link key={post.id} to={`/news/${post.id}`} className="block">
+                  <NewsCard
+                    item={{
+                      image: post.image,
+                      category: post.category,
+                      date: formatPostDate(post.createdAt),
+                      title: post.title,
+                      excerpt: postExcerpt(post.body),
+                    }} />
+                </Link>
+              ))}
+            </div>
+          )}
 
           <article
             className="
