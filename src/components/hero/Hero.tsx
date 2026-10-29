@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import StreamingCard from "../StreamingContent/StreamingCard";
 import HeroBackgroundSlideshow from "./HeroBackgroundSlideshow";
 import IspPlatformCard from "./IspPlatformCard";
+import MovecStoreCard from "./MovecStoreCard";
 
 const Hero = () => {
   return (
@@ -91,9 +92,14 @@ const Hero = () => {
           </StreamingCard>
         </div>
 
-        <StreamingCard delay={850} direction="right" duration={900} className="w-full sm:w-auto flex justify-center lg:justify-end">
-          <IspPlatformCard />
-        </StreamingCard>
+        <div className="w-full sm:w-auto flex flex-col items-center lg:items-end gap-4">
+          <StreamingCard delay={700} direction="right" duration={900} className="w-full sm:w-auto">
+            <MovecStoreCard />
+          </StreamingCard>
+          <StreamingCard delay={850} direction="right" duration={900} className="w-full sm:w-auto">
+            <IspPlatformCard />
+          </StreamingCard>
+        </div>
       </div>
     </section>
   );

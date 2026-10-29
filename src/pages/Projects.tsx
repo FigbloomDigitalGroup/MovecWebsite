@@ -2,37 +2,18 @@ import ContentHeader from "../components/ContentHeader/ContentHeader";
 import HeroHeader from "../components/heroheader/HeroHeader";
 import ProjectCard from "../components/cards/ProjectCard";
 import { Seo } from "../components/SEO/Seo";
+import { technicalProjects } from "../dummydata/TechnicalProjects";
 
-interface Project {
-  image: string;
-  tag: string;
-  title: string;
-  description: string;
-}
-
-// PLACEHOLDER CONTENT — swap these out for real completed/ongoing projects.
-const projects: Project[] = [
+// Our own product, listed first, ahead of the technical team's field projects.
+const projects = [
   {
-    image: "/images/geralt-businessman-3075828.jpg",
-    tag: "CCTV",
-    title: "Sample project title",
+    video: "/video/141445-777657273.mp4",
+    tag: "ISP Platform",
+    title: "Movec Connect: ISP Management Platform",
     description:
-      "Short description of the project goes here — what was built, for whom, and the outcome. Replace with a real case study.",
+      "Our all-in-one platform for ISPs, with automated billing and M-Pesa reconciliation, router management across brands and real-time network monitoring. Built from the problems ISP operators kept telling us about.",
   },
-  {
-    image: "/images/u_grs7xmagi8-ai-generated-9449768.jpg",
-    tag: "ISP",
-    title: "Another sample project",
-    description:
-      "This grid is built to hold any number of entries — add or remove items from the projects array once real case studies are ready.",
-  },
-  {
-    image: "/images/graphixmade-ai-generated-8337333_1920.png",
-    tag: "Software",
-    title: "A third sample project",
-    description:
-      "Use this placeholder to check the layout, then swap in real project names, images and descriptions.",
-  },
+  ...technicalProjects,
 ];
 
 const Projects = () => {
@@ -40,7 +21,7 @@ const Projects = () => {
     <>
       <Seo
         title="Projects | Movec - Our Work"
-        description="A look at projects Movec Connect has delivered for clients across software, security, networking and connectivity."
+        description="What Movec is working on: the Movec Connect ISP platform, WiFi and internet installations for homes and businesses, and CCTV security systems."
         path="/projects"
       />
 
@@ -61,9 +42,9 @@ const Projects = () => {
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <HeroHeader
             eyebrow="Our Work"
-            title="Projects we've"
-            span="delivered"
-            description="A sample of the kind of work Movec takes on — this page is currently populated with placeholder entries."
+            title="Projects we're"
+            span="working on"
+            description="The work our technical team is doing in the field — connecting homes and businesses and keeping their premises secure."
             variant="dark"
             align="center"
           />
@@ -83,13 +64,13 @@ const Projects = () => {
             eyebrow=""
             title="Recent"
             span="work"
-            description="Real case studies will replace these placeholders once content is ready."
+            description="From our own ISP platform to WiFi, internet and CCTV installations in the field, here's what we're working on."
             align="center"
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
             ))}
           </div>
         </div>
