@@ -5,7 +5,6 @@ import { db } from "../config/Firebase";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import NewsCard from "../components/cards/NewsCard";
 import HeroHeader from "../components/heroheader/HeroHeader";
-import NewsletterSubscribe from "../components/widgets/NewsletterSubscribe";
 import { Seo } from "../components/SEO/Seo";
 import { formatPostDate, postExcerpt } from "../dummydata/Posts";
 import type { Post } from "../dummydata/Posts";
@@ -149,22 +148,6 @@ const News = () => {
               </ul>
             </div>
           </article>
-        </div>
-      </section>
-
-      {/* Subscribe CTA */}
-      <section className="py-20 bg-[#0b1120]">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">
-            Don't miss what's next
-          </h2>
-          <p className="mt-3 text-slate-400">
-            Subscribe to get notified whenever there's news or an event
-            happening at Movec.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <NewsletterSubscribe variant="dark" />
-          </div>
         </div>
       </section>
     </>
