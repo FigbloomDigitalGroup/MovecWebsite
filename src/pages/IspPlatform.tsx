@@ -3,6 +3,7 @@ import { Features } from "../dummydata/Feaatures";
 import ContentHeader from "../components/ContentHeader/ContentHeader";
 import IspFeature from "../components/cards/IspFeature";
 import { Seo } from "../components/SEO/Seo";
+import { FaArrowRight } from "react-icons/fa";
 
 const IspPlatform = () => {
   return (
@@ -45,6 +46,76 @@ const IspPlatform = () => {
           <div className="w-24 h-1 bg-orange-500 mx-auto my-8" />
         </div>
 
+      </section>
+
+      {/* Why We Built The ISP Platform */}
+      <section
+        id="isp-platform-story"
+        className="
+          py-20
+          bg-white
+          dark:bg-black
+          transition-colors
+          duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-orange-500 font-semibold uppercase tracking-wider text-sm">
+              Why We Built It
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Our ISP Platform started with
+              <span className="text-[#10B982]"> a problem we kept hearing</span>
+            </h2>
+            <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
+              ISP operators kept telling us the same things: reconciling
+              M-Pesa payments by hand, juggling a different dashboard for
+              every router brand on the network, and no real way to see
+              what was actually happening on their network in real time.
+              So we built Movec Connect — one platform for billing,
+              routers and monitoring, instead of five.
+            </p>
+            <p className="mt-4 leading-7 text-slate-600 dark:text-slate-400">
+              It's built by the same team handling networking, security
+              and connectivity work for our clients every day — so every
+              feature comes from a real operational headache, not a guess.
+            </p>
+            <a
+              href="https://movecconnect.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                mt-8
+                inline-flex
+                items-center
+                gap-3
+                cursor-pointer
+                px-7
+                py-3
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                font-medium
+                transition-colors
+                duration-200
+                w-fit">
+              Visit movecconnect.com
+              <FaArrowRight />
+            </a>
+          </div>
+
+          <div className="relative h-80 lg:h-96 overflow-hidden rounded-sm [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              className="w-full h-full object-cover">
+              <source src="/video/141445-777657273.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
       </section>
 
       {/* Features Section */}

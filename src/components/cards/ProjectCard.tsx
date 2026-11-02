@@ -1,6 +1,8 @@
 interface ProjectCardProps {
   project: {
-    image: string;
+    image?: string;
+    // When set, the card plays this looping, muted video instead of the image.
+    video?: string;
     tag: string;
     title: string;
     description: string;
@@ -25,12 +27,25 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         overflow-hidden
         [clip-path:polygon(20px_0,calc(100%-20px)_0,100%_20px,100%_calc(100%-20px),calc(100%-20px)_100%,20px_100%,0_calc(100%-20px),0_20px)]">
       <div className="relative h-56 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
+        {project.video ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <source src={project.video} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent" />
         <span
           className="

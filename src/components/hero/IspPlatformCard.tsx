@@ -1,5 +1,3 @@
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
-
 /**
  * IspPlatformCard
  * -----------------------------------------------------------------------
@@ -59,7 +57,6 @@ const IspPlatformCard = () => {
             duration-200
             w-fit">
           movecconnect.com
-          <FaArrowUpRightFromSquare className="text-xs" />
         </a>
       </div>
     </div>

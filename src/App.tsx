@@ -29,6 +29,9 @@ const ItSupport = lazy(() => import("./pages/subPages/ItSupport"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const NewsPost = lazy(() => import("./pages/NewsPost"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 // Component to enable analytics tracking
 const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -56,6 +59,9 @@ const App: React.FC = () => {
              <Route path="/about" element={<About/>}/>
              <Route path="/contact" element={<Contact/>}/>
              <Route path="/news" element={<News/>}/>
+             <Route path="/news/:id" element={<NewsPost/>}/>
+             <Route path="/admin" element={<Admin/>}/>
+             <Route path="/unsubscribe" element={<Unsubscribe/>}/>
              <Route path="/projects" element={<Projects/>}/>
              <Route path="/software" element={<Software/>}/>
              <Route path="/billing" element={<Billing/>}/>
